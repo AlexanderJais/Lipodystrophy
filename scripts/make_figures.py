@@ -217,6 +217,46 @@ def figure2(deg):
     save(fig, "Fig2_myelin_persistence")
 
 
+CORE = [
+    ("Oligodendrocyte", ["Olig1", "Bcas1", "Mog", "Mal", "Cldn11", "Gjc3", "Qdpr",
+                         "Prr18", "Tmem278", "Plekhh1", "Adamts4"]),
+    ("Astrocyte", ["Aqp4", "Il33", "Gpr37l1"]),
+    ("Endothelial", ["Vwf"]),
+    ("Cold-inducible", ["Rbm3"]),
+]
+
+LIPID = [
+    ("Desaturation", ["Scd1", "Scd2"]),
+    ("Elongation", ["Elovl5", "Elovl6", "Elovl7", "Hsd17b12"]),
+    ("NADPH supply", ["Me1"]),
+]
+
+
+def figure3(deg):
+    fig = plt.figure(figsize=(180 * MM, 85 * MM))
+    ax_a = fig.add_axes([0.09, 0.14, 0.12, 0.76])
+    cols_a = [(s, "LDsaline_WT") for s in ("male", "female")]
+    norm = dot_heatmap(ax_a, deg, CORE, cols_a, vlim=1.0)
+    ax_a.set_xticklabels(["Male", "Female"])
+    ax_a.text(0.5, 1.02, "LD saline vs WT", transform=ax_a.transAxes,
+              ha="center", va="bottom", fontsize=5.5)
+    panel_letter(ax_a, "a", dx=-0.55, dy=1.02)
+
+    ax_b = fig.add_axes([0.46, 0.44, 0.30, 0.46])
+    cols_b = [(s, c) for s in ("male", "female") for c in COMPS]
+    dot_heatmap(ax_b, deg, LIPID, cols_b, vlim=1.0)
+    ax_b.axvline(2.5, color=INK, lw=0.5)
+    ax_b.set_xticklabels([LABEL[c] for _, c in cols_b], fontsize=5)
+    for x, sx in ((1, "Male"), (4, "Female")):
+        ax_b.text(x, -1.3, sx, ha="center", va="bottom", fontweight="bold",
+                  fontsize=6.5)
+    panel_letter(ax_b, "b", dx=-0.12, dy=1.08)
+
+    size_colour_legends(fig, norm, [0.50, 0.20, 0.22, 0.022],
+                        [0.46, 0.02, 0.30, 0.10], vlim=1.0)
+    save(fig, "Fig3_sex_conserved_core_and_lipid")
+
+
 def save(fig, name):
     for ext in ("pdf", "svg", "png"):
         fig.savefig(OUT / f"{name}.{ext}", bbox_inches="tight", pad_inches=0.02)
@@ -227,4 +267,5 @@ if __name__ == "__main__":
     deg = load()
     figure1(deg)
     figure2(deg)
+    figure3(deg)
     print("written to", OUT)
