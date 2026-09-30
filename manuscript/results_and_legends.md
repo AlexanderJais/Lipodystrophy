@@ -81,6 +81,21 @@ Normalized upregulated genes were enriched for endothelial-cell and pericyte mar
 
 Persistent downregulated genes were dominated by oligodendrocyte markers (47 genes, q = 1.0 × 10⁻⁵⁸), with additional enrichment for OPC, astrocyte and neuronal markers (Fig. 7b). They were also enriched for targets of the oligodendrocyte differentiation regulators SOX10, OLIG2 and SMARCA4 (BRG1) (q = 6.5 × 10⁻⁵, 8.6 × 10⁻⁵ and 1.1 × 10⁻⁵; Fig. 7c). Normalized downregulated genes included a smaller oligodendrocyte and astrocyte component (11 oligodendrocyte genes, q = 5.6 × 10⁻⁶), indicating that part of the glial response is leptin-sensitive, whereas the core SOX10-dependent maturation program is not. Persistent upregulated genes showed no enrichment. No partition was enriched for microglial markers.
 
+### Genes with no leptin effect form a connected oligodendrocyte–axon interaction network
+
+To test whether the genes that metreleptin failed to correct act as a coordinated program, we mapped known protein interactions (STRING, high confidence) among the downregulated genes of each partition (Fig. 8).
+
+The 151 downregulated genes with no leptin effect had 86 interactions, five times more than expected by chance (17 expected; P < 1 × 10⁻¹⁶; Fig. 8c). Most of them joined one connected network of 43 genes (Fig. 8a). The main hubs were the myelin genes *Plp1*, *Mbp*, *Mog* and *Mag* and the lineage regulators *Sox10*, *Olig1*, *Olig2* and *Myrf*. The network resolved into modules for:
+
+- oligodendrocyte transcription and the myelin core (*Sox10*, *Olig1/2*, *Myrf*, *Mbp*, *Plp1*, *Cnp*, *Ugt8a*, *Fa2h*);
+- myelin membrane proteins (*Mog*, *Mag*, *Mobp*, *Cldn11*, *Opalin*);
+- the axonal cytoskeleton (*Nefl*, *Nefm*, *Nefh*, *Kif5a*, *Tubb4a*);
+- G-protein-coupled signalling (*S1pr5*, *Lpar1*, *Grm3*, *Gna12*);
+- GABAergic neurons (*Gad1*, *Slc32a1*, *Pvalb*);
+- glial gap junctions (*Gjc2*, *Gjc3*, *Gjb1*).
+
+The 156 downregulated genes normalized by leptin were less connected (30 interactions versus 14 expected) and formed small, separate modules for microglial homeostasis (*P2ry12*, *Sall1*), fatty-acid synthesis (*Scd2*, *Elovl5*, *Elovl6*, *Hsd17b12*) and CREB/PGC-1α signalling (Fig. 8b). Thus, the program that resists metreleptin is a single interconnected oligodendrocyte–myelin–axon network, whereas leptin-sensitive changes are dispersed.
+
 Thus, metreleptin corrects the systemic metabolic derangements and the hypothalamic energy-deficit state of lipodystrophic mice, but, like adipose tissue loss, the oligodendrocyte maturation deficit in males persists despite treatment.
 
 ---
@@ -92,7 +107,8 @@ Thus, metreleptin corrects the systemic metabolic derangements and the hypothala
 3. The hypothalamic energy-deficit state is leptin-reversible. Metreleptin normalizes *Agrp*/*Npy* and the glucocorticoid-response, cold-inducible and endothelial programs. *Socs3* and *Nhlh2* confirm target engagement.
 4. In males, oligodendrocyte maturation is impaired and this does not respond to metreleptin (r = 0.96). Precursors are spared, and myelin-forming and mature oligodendrocytes are affected.
 5. By cell type, metreleptin corrects the vascular and glucocorticoid programs but not the SOX10/OLIG2-dependent oligodendrocyte program.
-6. The persistent glial deficit parallels persistent lipoatrophy, not the leptin-corrected metabolic state.
+6. Genes with no leptin effect form a single oligodendrocyte–myelin–axon interaction network (5-fold more interactions than expected), hubbed on *Plp1*, *Mbp*, *Sox10* and *Olig2*.
+7. The persistent glial deficit parallels persistent lipoatrophy, not the leptin-corrected metabolic state.
 
 ---
 
@@ -118,6 +134,9 @@ Thus, metreleptin corrects the systemic metabolic derangements and the hypothala
 
 **Fig. 7 | Metreleptin corrects vascular and glucocorticoid programs but not the oligodendrocyte program.**
 **a**, Male LD saline versus WT DEGs partitioned by their status in LD leptin versus WT: normalized by leptin (no longer differentially expressed) or no leptin effect (still differentially expressed, same direction). Red, upregulated; blue, downregulated. Predicted genes (*Gm*), mitochondrial transcripts and mapping artefacts (*Mir6236*, *Lars2*, *Tcaf2*) were excluded. **b**, Enrichment of cell-type markers (PanglaoDB). **c**, Enrichment of transcription-factor targets (NR3C1, OLIG2 and SMARCA4, ChEA ChIP-seq; SOX10, TRRUST). Dot area, −log₁₀ Benjamini–Hochberg-adjusted P value (Enrichr, Fisher's exact test); red, upregulated genes; blue, downregulated genes; open circles, not significant. Upregulated genes with no leptin effect (16 genes) showed no enrichment and are not shown.
+
+**Fig. 8 | Genes with no leptin effect form a connected oligodendrocyte–axon interaction network.**
+**a**, Protein-interaction network of downregulated male DEGs with no leptin effect. **b**, Protein-interaction network of downregulated male DEGs normalized by leptin. Edges, STRING v12 interactions (*Mus musculus*, combined score ≥ 0.7). Only modules of three or more genes are shown; modules were defined by connected components and greedy modularity. Node colour, log₂ fold change (a, LD leptin versus WT; b, LD saline versus WT); node size, number of interactions. **c**, Observed and expected numbers of interactions for each gene set (STRING PPI enrichment).
 
 **Supplementary Fig. 1 | Free fatty acids and glucose.**
 **a**, Plasma free fatty acids. **b**, Plasma glucose; n.d., not determined (males, week 14). Week 14. Each dot is one mouse; bars, median. * versus WT; # LD leptin versus LD saline; two-sided Mann–Whitney test.

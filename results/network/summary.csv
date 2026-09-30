@@ -1,0 +1,3 @@
+set,genes,edges,expected_edges,ppi_enrichment_p,main_component
+persistent_down,151,86,17,0.0,43
+normalized_down,156,30,14,0.00011,12
