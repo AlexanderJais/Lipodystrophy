@@ -320,14 +320,21 @@ OL_TFS = [("OL transcription\nfactors", ["Olig1", "Olig2", "Sox10", "Sox8",
 
 def stage_bars(ax, deg):
     x = np.arange(len(STAGES))
-    for k, (c, col, lab) in enumerate((
-            ("LDsaline_WT", DOWN, "LD saline vs WT"),
-            ("LDleptin_WT", "#8FB3D9", "LD leptin vs WT"))):
+    series = (("LDsaline_WT", DOWN, "LD saline vs WT"),
+              ("LDleptin_WT", "#8FB3D9", "LD leptin vs WT"),
+              ("LDsaline_LDleptin", "#E3A1A9", "LD saline vs LD leptin"))
+    for k, (c, col, lab) in enumerate(series):
         d = deg[("male", c)].log2FoldChange
+        # negative log2FC: lower than WT, or (last series) lower in saline
+        # than leptin, i.e. raised by metreleptin
         frac = [100 * sum(g in d.index and d[g] < 0 for g in gs) / len(gs)
                 for _, gs in STAGES]
-        ax.bar(x + (k - 0.5) * 0.36, [-f for f in frac], width=0.34,
-               color=col, lw=0, label=lab)
+        xs = x + (k - 1) * 0.27
+        ax.bar(xs, [-f for f in frac], width=0.25, color=col, lw=0,
+               label=lab)
+        for xi, f in zip(xs, frac):
+            if f == 0:
+                ax.text(xi, -1.5, "0", ha="center", va="top", fontsize=5)
     ax.axhline(0, color=INK, lw=0.5)
     ax.spines["bottom"].set_visible(False)
     ax.xaxis.tick_top()
