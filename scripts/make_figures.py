@@ -326,28 +326,33 @@ def stage_bars(ax, deg):
         d = deg[("male", c)].log2FoldChange
         frac = [100 * sum(g in d.index and d[g] < 0 for g in gs) / len(gs)
                 for _, gs in STAGES]
-        ax.bar(x + (k - 0.5) * 0.36, frac, width=0.34, color=col, lw=0,
-               label=lab)
+        ax.bar(x + (k - 0.5) * 0.36, [-f for f in frac], width=0.34,
+               color=col, lw=0, label=lab)
+    ax.axhline(0, color=INK, lw=0.5)
+    ax.spines["bottom"].set_visible(False)
+    ax.xaxis.tick_top()
+    ax.tick_params(axis="x", length=0, pad=3)
     ax.set_xticks(x)
     ax.set_xticklabels([n for n, _ in STAGES])
-    ax.set_ylim(0, 100)
-    ax.set_yticks([0, 25, 50, 75, 100])
-    ax.set_ylabel("Stage markers decreased (%)")
-    ax.legend(frameon=False, loc="upper left", handlelength=1,
-              borderaxespad=0)
-    ax.annotate("", xy=(len(STAGES) - 0.6, -24), xytext=(-0.4, -24),
+    ax.set_ylim(-100, 0)
+    ax.set_yticks([-100, -75, -50, -25, 0])
+    ax.set_ylabel("Stage-specific marker genes (%)")
+    ax.legend(frameon=False, loc="lower left", handlelength=1,
+              borderaxespad=0.3)
+    ax.annotate("", xy=(len(STAGES) - 0.6, 16), xytext=(-0.4, 16),
                 xycoords="data", annotation_clip=False,
                 arrowprops=dict(arrowstyle="->", lw=0.5, color=INK))
-    ax.text((len(STAGES) - 1) / 2, -30, "Differentiation", ha="center",
-            va="top", fontsize=5.5)
+    ax.text((len(STAGES) - 1) / 2, 18, "Differentiation", ha="center",
+            va="bottom", fontsize=5.5)
 
 
 def figure4(deg):
     fig = plt.figure(figsize=(180 * MM, 130 * MM))
-    ax_a = fig.add_axes([0.08, 0.66, 0.26, 0.26])
+    ax_a = fig.add_axes([0.08, 0.62, 0.26, 0.26])
     stage_bars(ax_a, deg)
-    ax_a.set_title("Male", loc="left", pad=4)
-    panel_letter(ax_a, "a", dx=-0.22, dy=1.05)
+    ax_a.text(0.0, 1.30, "Male", transform=ax_a.transAxes, fontsize=6.5,
+              va="bottom")
+    panel_letter(ax_a, "a", dx=-0.22, dy=1.30)
 
     ax_c = fig.add_axes([0.09, 0.10, 0.29, 0.30])
     cols = [(s, c) for s in ("male", "female") for c in COMPS]
