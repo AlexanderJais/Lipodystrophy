@@ -319,11 +319,10 @@ OL_TFS = [("OL transcription\nfactors", ["Olig1", "Olig2", "Sox10", "Sox8",
 
 
 def stage_strip(ax, deg):
-    """log2FC of each stage marker; markers not in a DEG list sit in an n.s. band."""
+    """log2FC of each differentially expressed stage marker."""
     series = (("LDsaline_WT", DOWN, "LD saline vs WT"),
               ("LDleptin_WT", "#8FB3D9", "LD leptin vs WT"),
               ("LDsaline_LDleptin", "#E3A1A9", "LD saline vs LD leptin"))
-    ns_y = 0.22
     rng = np.random.default_rng(1)
     for si, (_, gs) in enumerate(STAGES):
         jit = rng.uniform(-0.07, 0.07, len(gs))
@@ -334,9 +333,6 @@ def stage_strip(ax, deg):
                 if g in d.index:
                     ax.scatter(xc + dx, d[g], s=9, c=col, lw=0.3,
                                edgecolors=INK, zorder=3)
-                else:
-                    ax.scatter(xc + dx, ns_y, s=4, facecolors="none",
-                               edgecolors=RULE, lw=0.5, zorder=2)
     ax.axhline(0, color=INK, lw=0.5)
     ax.spines["bottom"].set_visible(False)
     ax.xaxis.tick_top()
@@ -344,18 +340,18 @@ def stage_strip(ax, deg):
     ax.set_xticks(range(len(STAGES)))
     ax.set_xticklabels([n for n, _ in STAGES])
     ax.set_xlim(-0.55, len(STAGES) - 0.45)
-    ax.set_ylim(-1.4, 0.34)
-    ax.set_yticks([-1.2, -0.8, -0.4, 0, ns_y])
-    ax.set_yticklabels(["\u22121.2", "\u22120.8", "\u22120.4", "0", "n.s."])
+    ax.set_ylim(-1.4, 0)
+    ax.set_yticks([-1.2, -0.8, -0.4, 0])
+    ax.set_yticklabels(["\u22121.2", "\u22120.8", "\u22120.4", "0"])
     ax.set_ylabel("log$_2$ fold change")
     handles = [Line2D([], [], ls="", marker="o", mfc=col, mec=INK, mew=0.3,
                       ms=3) for _, col, _ in series]
     ax.legend(handles, [lab for _, _, lab in series], frameon=False, loc="lower left", handletextpad=0.1,
               borderaxespad=0.3)
-    ax.annotate("", xy=(len(STAGES) - 0.6, 0.62), xytext=(-0.4, 0.62),
+    ax.annotate("", xy=(len(STAGES) - 0.6, 0.30), xytext=(-0.4, 0.30),
                 xycoords="data", annotation_clip=False,
                 arrowprops=dict(arrowstyle="->", lw=0.5, color=INK))
-    ax.text((len(STAGES) - 1) / 2, 0.66, "Differentiation", ha="center",
+    ax.text((len(STAGES) - 1) / 2, 0.34, "Differentiation", ha="center",
             va="bottom", fontsize=5.5)
 
 
