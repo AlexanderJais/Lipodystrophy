@@ -233,27 +233,29 @@ LIPID = [
 
 
 def figure3(deg):
-    fig = plt.figure(figsize=(180 * MM, 85 * MM))
-    ax_a = fig.add_axes([0.09, 0.14, 0.12, 0.76])
-    cols_a = [(s, "LDsaline_WT") for s in ("male", "female")]
+    fig = plt.figure(figsize=(180 * MM, 90 * MM))
+    ax_a = fig.add_axes([0.08, 0.14, 0.30, 0.76])
+    cols_a = [(s, c) for s in ("male", "female") for c in COMPS]
     norm = dot_heatmap(ax_a, deg, CORE, cols_a, vlim=1.0)
-    ax_a.set_xticklabels(["Male", "Female"])
-    ax_a.text(0.5, 1.02, "LD saline vs WT", transform=ax_a.transAxes,
-              ha="center", va="bottom", fontsize=5.5)
-    panel_letter(ax_a, "a", dx=-0.55, dy=1.02)
+    ax_a.axvline(2.5, color=INK, lw=0.5)
+    ax_a.set_xticklabels([LABEL[c] for _, c in cols_a], fontsize=5)
+    for x, sx in ((1, "Male"), (4, "Female")):
+        ax_a.text(x, -1.3, sx, ha="center", va="bottom", fontweight="bold",
+                  fontsize=6.5)
+    panel_letter(ax_a, "a", dx=-0.2, dy=1.04)
 
-    ax_b = fig.add_axes([0.46, 0.44, 0.30, 0.46])
+    ax_b = fig.add_axes([0.57, 0.44, 0.31, 0.46])
     cols_b = [(s, c) for s in ("male", "female") for c in COMPS]
     dot_heatmap(ax_b, deg, LIPID, cols_b, vlim=1.0)
     ax_b.axvline(2.5, color=INK, lw=0.5)
-    ax_b.set_xticklabels([LABEL[c] for _, c in cols_b], fontsize=5)
+    ax_b.set_xticklabels([LABEL[c] for _, c in cols_b], fontsize=4.6)
     for x, sx in ((1, "Male"), (4, "Female")):
         ax_b.text(x, -1.3, sx, ha="center", va="bottom", fontweight="bold",
                   fontsize=6.5)
     panel_letter(ax_b, "b", dx=-0.12, dy=1.08)
 
-    size_colour_legends(fig, norm, [0.50, 0.20, 0.22, 0.022],
-                        [0.46, 0.02, 0.30, 0.10], vlim=1.0)
+    size_colour_legends(fig, norm, [0.63, 0.20, 0.19, 0.022],
+                        [0.58, 0.02, 0.30, 0.10], vlim=1.0)
     save(fig, "Fig3_sex_conserved_core_and_lipid")
 
 

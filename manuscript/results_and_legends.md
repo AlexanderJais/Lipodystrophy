@@ -14,7 +14,7 @@ Saline-treated LD males showed the arcuate signature of energy deficit: expressi
 
 None of these 18 genes differed between metreleptin-treated LD males and WT controls. *Icam1* and *Tgm2* were also significantly lower in metreleptin-treated than in saline-treated LD mice (Fig. 1b). Metreleptin-treated LD males had increased expression of the canonical leptin target *Socs3* (log₂FC = 0.99) and the leptin-responsive arcuate transcription factor *Nhlh2* (log₂FC = 0.62), confirming hypothalamic leptin signalling (Fig. 1b). In females, *Agrp* and *Npy* were not differentially expressed. However, *Rbm3* and *Vwf* were increased in saline-treated LD females, and metreleptin significantly corrected 11 genes that were altered in saline-treated LD females, including *Vgf*, *Podxl*, *Plxnd1*, *Nr2f2*, *Htra1* and *C4b*.
 
-### An oligodendrocyte and myelin deficit persists despite metreleptin
+### In males, an oligodendrocyte and myelin deficit persists despite metreleptin
 
 In parallel, saline-treated LD males showed coordinated downregulation of the oligodendrocyte lineage (log₂FC −0.30 to −1.03; Fig. 2a), spanning:
 
@@ -34,7 +34,7 @@ Thus, metreleptin corrects the hypothalamic energy-deficit state of lipodystroph
 
 1. Lipodystrophy remodels the hypothalamic transcriptome, mainly in males (456 vs 62 DEGs).
 2. The energy-deficit state is leptin-reversible. Metreleptin normalizes *Agrp*/*Npy* and the glucocorticoid-response, cold-inducible and endothelial programs. *Socs3* and *Nhlh2* confirm hypothalamic target engagement.
-3. The glial deficit is leptin-resistant. The coordinated loss of the oligodendrocyte and myelin program persists under metreleptin (r = 0.96).
+3. In males, the glial deficit is leptin-resistant. The coordinated loss of the oligodendrocyte and myelin program persists under metreleptin (r = 0.96).
 4. Implication: leptin replacement may not protect hypothalamic white matter in lipodystrophy.
 
 ---
