@@ -33,7 +33,9 @@ mpl.rcParams.update({
     "axes.edgecolor": INK, "text.color": INK, "axes.labelcolor": INK,
     "xtick.color": INK, "ytick.color": INK, "axes.spines.top": False,
     "axes.spines.right": False, "pdf.fonttype": 42, "svg.fonttype": "none",
-    "savefig.dpi": 600,
+    "savefig.dpi": 600, "mathtext.fontset": "custom",
+    "mathtext.rm": "Nimbus Sans", "mathtext.it": "Nimbus Sans:italic",
+    "mathtext.bf": "Nimbus Sans:bold",
 })
 
 LABEL = {"LDsaline_WT": "LD saline\nvs WT", "LDleptin_WT": "LD leptin\nvs WT",
@@ -259,6 +261,52 @@ def figure3(deg):
     save(fig, "Fig3_sex_conserved_core_and_lipid")
 
 
+def figure0():
+    """Study design: three groups and the three comparisons."""
+    from matplotlib.patches import FancyArrowPatch, FancyBboxPatch
+    fig = plt.figure(figsize=(120 * MM, 62 * MM))
+    ax = fig.add_axes([0, 0, 1, 1])
+    ax.set_xlim(0, 120)
+    ax.set_ylim(0, 62)
+    ax.axis("off")
+    w, h = 30, 14
+    groups = {
+        "WT": (60, 46, "WT", "$\\it{Ldlr}^{-/-}$", ""),
+        "sal": (22, 10, "LD saline", "$\\it{Ldlr}^{-/-}$; aP2-nSrebp1c-Tg", "Saline"),
+        "lep": (98, 10, "LD leptin", "$\\it{Ldlr}^{-/-}$; aP2-nSrebp1c-Tg", "Metreleptin"),
+    }
+    for x, y, name, geno, tx in groups.values():
+        ax.add_patch(FancyBboxPatch((x - w / 2, y - h / 2), w, h,
+                                    boxstyle="round,pad=0,rounding_size=1.5",
+                                    fc="white", ec=INK, lw=0.6))
+        dy = 0 if tx else -1.6
+        ax.text(x, y + 3.2 + dy, name, ha="center", va="center", fontsize=7,
+                fontweight="bold")
+        ax.text(x, y - 0.6 + dy, geno, ha="center", va="center", fontsize=5)
+        ax.text(x, y - 3.9, tx, ha="center", va="center", fontsize=5,
+                color=MUTED)
+
+    def arrow(a, b, label, rot, off):
+        (x1, y1), (x2, y2) = a, b
+        ax.add_patch(FancyArrowPatch((x1, y1), (x2, y2), arrowstyle="<->",
+                                     mutation_scale=6, lw=0.6, color=INK,
+                                     shrinkA=0, shrinkB=0))
+        mx, my = (x1 + x2) / 2 + off[0], (y1 + y2) / 2 + off[1]
+        ax.text(mx, my, label, ha="center", va="center", fontsize=6,
+                rotation=rot, rotation_mode="anchor")
+
+    arrow((22, 17.5), (45, 39), "Lipodystrophy effect\nLD saline vs WT",
+          43, (-5.5, 4.5))
+    arrow((98, 17.5), (75, 39), "Normalization\nLD leptin vs WT",
+          -43, (5.5, 4.5))
+    arrow((37.5, 10), (82.5, 10), "Leptin effect\nLD saline vs LD leptin",
+          0, (0, -6.5))
+    ax.text(60, 25, "Hypothalamus\nbulk RNA-seq\nmales and females",
+            ha="center", va="center", fontsize=5, color=MUTED,
+            linespacing=1.3)
+    save(fig, "Fig0_study_design")
+
+
 def save(fig, name):
     for ext in ("pdf", "svg", "png"):
         fig.savefig(OUT / f"{name}.{ext}", bbox_inches="tight", pad_inches=0.02)
@@ -267,6 +315,7 @@ def save(fig, name):
 
 if __name__ == "__main__":
     deg = load()
+    figure0()
     figure1(deg)
     figure2(deg)
     figure3(deg)
