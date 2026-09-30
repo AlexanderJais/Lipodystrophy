@@ -303,6 +303,74 @@ def figure0():
     save(fig, "Fig0_study_design")
 
 
+STAGES = [
+    ("OPC", ["Pdgfra", "Cspg4", "Ptprz1", "Vcan", "Tnr", "Lhfpl3", "Matn4",
+             "Sox6"]),
+    ("COP", ["Neu4", "Bmp4", "Gpr17", "Sox4", "Sox11"]),
+    ("NFOL", ["Bcas1", "Enpp6", "Tmem2", "Fyn", "Frmd4a", "Tcf7l2", "Itpr2",
+              "Tns3"]),
+    ("MFOL", ["Mal", "Opalin", "Plekhh1", "Ctps", "Mog", "Serinc5", "Prr18",
+              "Pllp"]),
+    ("MOL", ["Klk6", "Apod", "Grm3", "Slc5a11", "Ptgds", "Il33", "Anln",
+             "Hapln2", "Car2", "Trf", "Cryab", "Mobp", "Aspa"]),
+]
+OL_TFS = [("OL transcription\nfactors", ["Olig1", "Olig2", "Sox10", "Sox8",
+                                          "Myrf", "Zeb2", "Qki"])]
+
+
+def stage_bars(ax, deg):
+    x = np.arange(len(STAGES))
+    for k, (c, col, lab) in enumerate((
+            ("LDsaline_WT", DOWN, "LD saline vs WT"),
+            ("LDleptin_WT", "#8FB3D9", "LD leptin vs WT"))):
+        d = deg[("male", c)].log2FoldChange
+        frac = [100 * sum(g in d.index and d[g] < 0 for g in gs) / len(gs)
+                for _, gs in STAGES]
+        ax.bar(x + (k - 0.5) * 0.36, frac, width=0.34, color=col, lw=0,
+               label=lab)
+    ax.set_xticks(x)
+    ax.set_xticklabels([n for n, _ in STAGES])
+    ax.set_ylim(0, 100)
+    ax.set_yticks([0, 25, 50, 75, 100])
+    ax.set_ylabel("Stage markers decreased (%)")
+    ax.legend(frameon=False, loc="upper left", handlelength=1,
+              borderaxespad=0)
+    ax.annotate("", xy=(len(STAGES) - 0.6, -24), xytext=(-0.4, -24),
+                xycoords="data", annotation_clip=False,
+                arrowprops=dict(arrowstyle="->", lw=0.5, color=INK))
+    ax.text((len(STAGES) - 1) / 2, -30, "Differentiation", ha="center",
+            va="top", fontsize=5.5)
+
+
+def figure4(deg):
+    fig = plt.figure(figsize=(180 * MM, 130 * MM))
+    ax_a = fig.add_axes([0.08, 0.66, 0.26, 0.26])
+    stage_bars(ax_a, deg)
+    ax_a.set_title("Male", loc="left", pad=4)
+    panel_letter(ax_a, "a", dx=-0.22, dy=1.05)
+
+    ax_c = fig.add_axes([0.09, 0.10, 0.29, 0.30])
+    cols = [(s, c) for s in ("male", "female") for c in COMPS]
+    norm = dot_heatmap(ax_c, deg, OL_TFS, cols, vlim=1.0)
+    ax_c.axvline(2.5, color=INK, lw=0.5)
+    ax_c.set_xticklabels([LABEL[c] for _, c in cols], fontsize=4.6)
+    for x, sx in ((1, "Male"), (4, "Female")):
+        ax_c.text(x, -1.2, sx, ha="center", va="bottom", fontsize=6.5)
+    panel_letter(ax_c, "c", dx=-0.2, dy=1.1)
+
+    ax_b = fig.add_axes([0.53, 0.10, 0.30, 0.84])
+    dot_heatmap(ax_b, deg, STAGES, cols, vlim=1.0)
+    ax_b.axvline(2.5, color=INK, lw=0.5)
+    ax_b.set_xticklabels([LABEL[c] for _, c in cols], fontsize=4.6)
+    for x, sx in ((1, "Male"), (4, "Female")):
+        ax_b.text(x, -1.5, sx, ha="center", va="bottom", fontsize=6.5)
+    panel_letter(ax_b, "b", dx=-0.16, dy=1.02)
+
+    size_colour_legends(fig, norm, [0.08, 0.53, 0.14, 0.018],
+                        [0.27, 0.49, 0.18, 0.08], vlim=1.0)
+    save(fig, "Fig4_oligodendrocyte_maturation")
+
+
 def save(fig, name):
     for ext in ("pdf", "svg", "png"):
         fig.savefig(OUT / f"{name}.{ext}", bbox_inches="tight", pad_inches=0.02)
@@ -315,4 +383,5 @@ if __name__ == "__main__":
     figure1(deg)
     figure2(deg)
     figure3(deg)
+    figure4(deg)
     print("written to", OUT)
