@@ -70,6 +70,17 @@ Effect sizes in females were about half those in males (slope 0.53). In males, 1
 
 Saline-treated LD males also showed reduced expression of fatty-acid desaturation and elongation genes (*Scd2*, *Elovl5*, *Elovl6*, *Hsd17b12*) and of *Me1*, which supplies NADPH for lipogenesis. All of these were normalized under metreleptin, except the myelin-associated elongase *Elovl7* (Fig. 6b). In females, only *Scd1* was reduced (Fig. 6b).
 
+### Metreleptin corrects vascular and glucocorticoid programs but not the oligodendrocyte program
+
+To define without gene preselection what metreleptin does and does not correct, we split the male LD saline versus WT DEGs by their status in metreleptin-treated mice (Fig. 7a):
+
+- **Normalized:** no longer different from WT (120 up, 156 down).
+- **Persistent:** still different from WT, always in the same direction (16 up, 151 down).
+
+Normalized upregulated genes were enriched for endothelial-cell and pericyte markers (q = 1.7 × 10⁻⁵ and 1.0 × 10⁻⁴; Fig. 7b) and for glucocorticoid-receptor (NR3C1) targets (23 genes, q = 1.2 × 10⁻⁸; Fig. 7c). This identifies the leptin-reversible hypothalamic response as a vascular and glucocorticoid program.
+
+Persistent downregulated genes were dominated by oligodendrocyte markers (47 genes, q = 1.0 × 10⁻⁵⁸), with additional enrichment for OPC, astrocyte and neuronal markers (Fig. 7b). They were also enriched for targets of the oligodendrocyte differentiation regulators SOX10, OLIG2 and SMARCA4 (BRG1) (q = 6.5 × 10⁻⁵, 8.6 × 10⁻⁵ and 1.1 × 10⁻⁵; Fig. 7c). Normalized downregulated genes included a smaller oligodendrocyte and astrocyte component (11 oligodendrocyte genes, q = 5.6 × 10⁻⁶), indicating that part of the glial response is leptin-sensitive, whereas the core SOX10-dependent maturation program is not. Persistent upregulated genes showed no enrichment. No partition was enriched for microglial markers.
+
 Thus, metreleptin corrects the systemic metabolic derangements and the hypothalamic energy-deficit state of lipodystrophic mice, but, like adipose tissue loss, the oligodendrocyte maturation deficit in males persists despite treatment.
 
 ---
@@ -80,7 +91,8 @@ Thus, metreleptin corrects the systemic metabolic derangements and the hypothala
 2. Lipodystrophy remodels the hypothalamic transcriptome, mainly in males (456 vs 62 DEGs).
 3. The hypothalamic energy-deficit state is leptin-reversible. Metreleptin normalizes *Agrp*/*Npy* and the glucocorticoid-response, cold-inducible and endothelial programs. *Socs3* and *Nhlh2* confirm target engagement.
 4. In males, oligodendrocyte maturation is impaired and this does not respond to metreleptin (r = 0.96). Precursors are spared, and myelin-forming and mature oligodendrocytes are affected.
-5. The persistent glial deficit parallels persistent lipoatrophy, not the leptin-corrected metabolic state.
+5. By cell type, metreleptin corrects the vascular and glucocorticoid programs but not the SOX10/OLIG2-dependent oligodendrocyte program.
+6. The persistent glial deficit parallels persistent lipoatrophy, not the leptin-corrected metabolic state.
 
 ---
 
@@ -103,6 +115,9 @@ Thus, metreleptin corrects the systemic metabolic derangements and the hypothala
 
 **Fig. 6 | A sex-conserved glial signature and reduced fatty-acid synthesis in lipodystrophic hypothalamus.**
 **a**, Genes differentially expressed in both male and female LD saline versus WT hypothalamus, shown across all comparisons. **b**, Fatty-acid desaturation, elongation and NADPH-supply genes. Encoding as in Fig. 3b.
+
+**Fig. 7 | Metreleptin corrects vascular and glucocorticoid programs but not the oligodendrocyte program.**
+**a**, Male LD saline versus WT DEGs partitioned by their status in LD leptin versus WT: normalized (not differentially expressed) or persistent (differentially expressed in the same direction). Predicted genes (*Gm*), mitochondrial transcripts and mapping artefacts (*Mir6236*, *Lars2*, *Tcaf2*) were excluded. **b**, Enrichment of cell-type markers (PanglaoDB). **c**, Enrichment of transcription-factor targets (NR3C1, OLIG2 and SMARCA4, ChEA ChIP-seq; SOX10, TRRUST). Dot area, −log₁₀ Benjamini–Hochberg-adjusted P value (Enrichr, Fisher's exact test); red, upregulated; blue, downregulated; open circles, not significant. The persistent-up partition (16 genes) showed no enrichment and is not shown.
 
 **Supplementary Fig. 1 | Free fatty acids and glucose.**
 **a**, Plasma free fatty acids. **b**, Plasma glucose; n.d., not determined (males, week 14). Week 14. Each dot is one mouse; bars, median. * versus WT; # LD leptin versus LD saline; two-sided Mann–Whitney test.

@@ -472,6 +472,89 @@ def figS1_ffa_glucose():
     save(fig, "FigS1_fatty_acids_glucose")
 
 
+PART_COLS = [("Normalized_up", "Normalized\nup", UP),
+             ("Normalized_down", "Normalized\ndown", DOWN),
+             ("Persistent_down", "Persistent\ndown", DOWN)]
+CELLTYPES = [("Oligodendrocytes", "Oligodendrocytes"),
+             ("Oligodendrocyte Progenitor Cells", "OPCs"),
+             ("Astrocytes", "Astrocytes"), ("Neurons", "Neurons"),
+             ("Endothelial Cells", "Endothelial cells"),
+             ("Pericytes", "Pericytes"), ("Microglia", "Microglia")]
+TFS = [("NR3C1 34362910 ChIP-Seq WistarRat Hippocampus Stress", "NR3C1 (GR)"),
+       ("OLIG2 23332759 ChIP-Seq OLIGODENDROCYTES Mouse", "OLIG2"),
+       ("SMARCA4 23332759 ChIP-Seq OLIGODENDROCYTES Mouse", "SMARCA4 (BRG1)"),
+       ("SOX10 human", "SOX10")]
+
+
+def enrich_dots(ax, tables, rows):
+    for j, (key, _, col) in enumerate(PART_COLS):
+        t = tables[key]
+        for i, (term, _) in enumerate(rows):
+            r = t[t.term == term]
+            q = r.padj.iloc[0] if len(r) else 1.0
+            if q < 0.05:
+                ax.scatter(j, i, s=6 + 5 * min(-np.log10(q), 20), c=col,
+                           lw=0.3, edgecolors=INK, zorder=3)
+            else:
+                ax.scatter(j, i, s=4, facecolors="none", edgecolors=RULE,
+                           lw=0.5, zorder=2)
+    ax.set_xlim(-0.6, len(PART_COLS) - 0.4)
+    ax.set_ylim(len(rows) - 0.5, -0.5)
+    ax.set_yticks(range(len(rows)))
+    ax.set_yticklabels([lab for _, lab in rows])
+    ax.set_xticks(range(len(PART_COLS)))
+    ax.set_xticklabels([lab for _, lab, _ in PART_COLS], fontsize=5)
+    ax.tick_params(length=0, pad=3)
+    for sp in ax.spines.values():
+        sp.set_visible(False)
+
+
+def figure7():
+    part = ROOT / "results" / "leptin_partition"
+    tables = {k: pd.read_csv(part / f"{k}.csv") for k, _, _ in PART_COLS}
+    sizes = pd.read_csv(part / "sizes.csv", index_col=0).iloc[:, 0]
+    fig = plt.figure(figsize=(180 * MM, 70 * MM))
+
+    ax_a = fig.add_axes([0.07, 0.18, 0.22, 0.66])
+    order = ["Normalized up", "Normalized down", "Persistent up",
+             "Persistent down"]
+    vals = [sizes[o] for o in order]
+    cols = [UP, DOWN, UP, DOWN]
+    y = np.arange(len(order))
+    ax_a.barh(y, vals, color=cols, height=0.62, lw=0)
+    for yi, v in zip(y, vals):
+        ax_a.text(v + 4, yi, str(v), va="center", fontsize=5.5)
+    ax_a.set_yticks(y)
+    ax_a.set_yticklabels(order)
+    ax_a.invert_yaxis()
+    ax_a.set_xlim(0, 190)
+    ax_a.set_xlabel("Male LD saline vs WT DEGs")
+    ax_a.spines["left"].set_visible(False)
+    ax_a.tick_params(axis="y", length=0)
+    panel_letter(ax_a, "a", dx=-0.42, dy=1.06)
+
+    ax_b = fig.add_axes([0.45, 0.18, 0.21, 0.66])
+    enrich_dots(ax_b, tables, CELLTYPES)
+    ax_b.set_title("Cell-type markers", fontsize=6, pad=4)
+    panel_letter(ax_b, "b", dx=-0.62, dy=1.06)
+
+    ax_c = fig.add_axes([0.78, 0.40, 0.21, 0.44])
+    enrich_dots(ax_c, tables, TFS)
+    ax_c.set_title("Transcription-factor targets", fontsize=6, pad=4)
+    panel_letter(ax_c, "c", dx=-0.62, dy=1.1)
+
+    sax = fig.add_axes([0.66, 0.02, 0.32, 0.14])
+    sax.axis("off")
+    handles = [Line2D([], [], ls="", marker="o", mfc="white", mec=INK, mew=0.3,
+                      ms=np.sqrt(6 + 5 * v)) for v in (2, 10, 20)]
+    handles.append(Line2D([], [], ls="", marker="o", mfc="none", mec=RULE,
+                          mew=0.5, ms=2))
+    sax.legend(handles, ["2", "10", "\u226520", "n.s."], ncol=4, frameon=False,
+               title="\u2212log$_{10}$ q", title_fontsize=5.5, loc="center",
+               handletextpad=0.2, columnspacing=0.8)
+    save(fig, "Fig7_leptin_fixes_vs_persists")
+
+
 def save(fig, name):
     for ext in ("pdf", "svg", "png"):
         fig.savefig(OUT / f"{name}.{ext}", bbox_inches="tight", pad_inches=0.02)
@@ -486,5 +569,6 @@ if __name__ == "__main__":
     figure2(deg)   # Fig. 4
     figure4(deg)   # Fig. 5
     figure3(deg)   # Fig. 6
+    figure7()      # Fig. 7
     figS1_ffa_glucose()
     print("written to", OUT)
