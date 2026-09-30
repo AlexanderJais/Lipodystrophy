@@ -456,4 +456,5 @@ if __name__ == "__main__":
     figure4(deg)
     figure_body()
     figure_body(BODY[:3], "Fig_body_weight_fat", (1, 3), 62)
+    figure_body(BODY[3:], "Fig_metabolic_phenotype", (2, 3), 110)
     print("written to", OUT)
