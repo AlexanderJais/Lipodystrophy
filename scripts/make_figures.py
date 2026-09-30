@@ -385,6 +385,59 @@ def figure4(deg):
     save(fig, "Fig4_oligodendrocyte_maturation")
 
 
+BODY = [("Weight", "Body weight (g)"), ("VAT", "VAT (mg)"), ("SAT", "SAT (mg)"),
+        ("Liver", "Liver (mg)"), ("Triglycerides", "Triglycerides"),
+        ("VLDL triglycerides", "VLDL triglycerides"), ("fFA", "Free fatty acids"),
+        ("ALAT", "ALAT"), ("Glucose", "Glucose")]
+GROUPS = [("WT", INK), ("LD saline", UP), ("LD leptin", DOWN)]
+
+
+def stars(p):
+    return ("****" if p < 1e-4 else "***" if p < 1e-3 else "**" if p < 0.01
+            else "*" if p < 0.05 else "")
+
+
+def figure_body(week=16):
+    from scipy.stats import mannwhitneyu
+    ph = pd.read_csv(DATA / "phenotype_extracted.csv")
+    ph = ph[ph.week == week]
+    fig, axes = plt.subplots(3, 3, figsize=(180 * MM, 150 * MM))
+    fig.subplots_adjust(left=0.08, right=0.98, top=0.93, bottom=0.05,
+                        wspace=0.45, hspace=0.32)
+    rng = np.random.default_rng(3)
+    for k, (ax, (m, ylab)) in enumerate(zip(axes.flat, BODY)):
+        panel_letter(ax, "abcdefghi"[k], dx=-0.25, dy=1.0)
+        top = ph[ph.measure == m].value.max()
+        for si, sex in enumerate(("female", "male")):
+            vals = {}
+            for gi, (g, col) in enumerate(GROUPS):
+                v = ph[(ph.measure == m) & (ph.sex == sex) & (ph.group == g)].value
+                vals[g] = v.values
+                x = si * 3.6 + gi
+                ax.scatter(x + rng.uniform(-0.18, 0.18, len(v)), v, s=7, c=col,
+                           lw=0, alpha=0.85, zorder=3)
+                ax.plot([x - 0.3, x + 0.3], [v.median()] * 2, color=INK, lw=0.8,
+                        zorder=4)
+            for gi, (g, _) in enumerate(GROUPS[1:], start=1):
+                mk = stars(mannwhitneyu(vals[g], vals["WT"]).pvalue)
+                if g == "LD leptin":
+                    q = stars(mannwhitneyu(vals[g], vals["LD saline"]).pvalue)
+                    mk += ("\n" if mk else "") + "#" * len(q)
+                ax.text(si * 3.6 + gi, top * 1.08, mk, ha="center", va="bottom",
+                        fontsize=5, linespacing=0.9)
+        ax.set_ylim(0, top * 1.28)
+        ax.set_xlim(-0.6, 6.2)
+        ax.set_xticks([1, 4.6])
+        ax.set_xticklabels(["Female", "Male"])
+        ax.tick_params(axis="x", length=0)
+        ax.set_ylabel(ylab)
+    handles = [Line2D([], [], ls="", marker="o", mfc=c, mec="none", ms=3.5)
+               for _, c in GROUPS]
+    fig.legend(handles, [g for g, _ in GROUPS], ncol=3, frameon=False,
+               loc="upper center", bbox_to_anchor=(0.5, 1.0), handletextpad=0.1)
+    save(fig, "Fig_body_phenotype")
+
+
 def save(fig, name):
     for ext in ("pdf", "svg", "png"):
         fig.savefig(OUT / f"{name}.{ext}", bbox_inches="tight", pad_inches=0.02)
@@ -398,4 +451,5 @@ if __name__ == "__main__":
     figure2(deg)
     figure3(deg)
     figure4(deg)
+    figure_body()
     print("written to", OUT)
