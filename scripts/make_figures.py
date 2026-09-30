@@ -502,9 +502,15 @@ def enrich_dots(ax, tables, rows):
     ax.set_ylim(len(rows) - 0.5, -0.5)
     ax.set_yticks(range(len(rows)))
     ax.set_yticklabels([lab for _, lab in rows])
-    ax.set_xticks(range(len(PART_COLS)))
-    ax.set_xticklabels([lab for _, lab, _ in PART_COLS], fontsize=5)
+    ax.set_xticks([])
     ax.tick_params(length=0, pad=3)
+    yb = len(rows) - 0.5 + 0.25
+    ax.plot([-0.25, 1.25], [yb, yb], color=INK, lw=0.5, clip_on=False)
+    ax.plot([1.75, 2.25], [yb, yb], color=INK, lw=0.5, clip_on=False)
+    ax.text(0.5, yb + 0.2, "Normalized\nby leptin", ha="center", va="top",
+            fontsize=5.5)
+    ax.text(2, yb + 0.2, "No leptin\neffect", ha="center", va="top",
+            fontsize=5.5)
     for sp in ax.spines.values():
         sp.set_visible(False)
 
@@ -516,18 +522,17 @@ def figure7():
     fig = plt.figure(figsize=(180 * MM, 70 * MM))
 
     ax_a = fig.add_axes([0.07, 0.18, 0.22, 0.66])
-    order = ["Normalized up", "Normalized down", "Persistent up",
-             "Persistent down"]
-    vals = [sizes[o] for o in order]
-    cols = [UP, DOWN, UP, DOWN]
-    y = np.arange(len(order))
-    ax_a.barh(y, vals, color=cols, height=0.62, lw=0)
-    for yi, v in zip(y, vals):
-        ax_a.text(v + 4, yi, str(v), va="center", fontsize=5.5)
+    groups = [("Normalized\nby leptin", sizes["Normalized up"], sizes["Normalized down"]),
+              ("No leptin\neffect", sizes["Persistent up"], sizes["Persistent down"])]
+    y = np.arange(len(groups))
+    for yi, (_, up, dn) in zip(y, groups):
+        ax_a.barh(yi, up, color=UP, height=0.55, lw=0)
+        ax_a.barh(yi, dn, left=up, color=DOWN, height=0.55, lw=0)
+        ax_a.text(up + dn + 6, yi, str(up + dn), va="center", fontsize=5.5)
     ax_a.set_yticks(y)
-    ax_a.set_yticklabels(order)
+    ax_a.set_yticklabels([g for g, _, _ in groups])
     ax_a.invert_yaxis()
-    ax_a.set_xlim(0, 190)
+    ax_a.set_xlim(0, 330)
     ax_a.set_xlabel("Male LD saline vs WT DEGs")
     ax_a.spines["left"].set_visible(False)
     ax_a.tick_params(axis="y", length=0)
