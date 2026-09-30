@@ -398,7 +398,7 @@ def stars(p):
 
 
 def figure_body(measures=BODY, name="Fig_body_phenotype", grid=(3, 3),
-                height=150, week=16):
+                height=150, week=14):
     from scipy.stats import mannwhitneyu
     ph = pd.read_csv(DATA / "phenotype_extracted.csv")
     ph = ph[ph.week == week]
@@ -421,6 +421,10 @@ def figure_body(measures=BODY, name="Fig_body_phenotype", grid=(3, 3),
                            lw=0, alpha=0.85, zorder=3)
                 ax.plot([x - 0.3, x + 0.3], [v.median()] * 2, color=INK, lw=0.8,
                         zorder=4)
+            if not len(vals["WT"]):
+                ax.text(si * 3.6 + 1, top * 0.05, "n.d.", ha="center",
+                        va="bottom", fontsize=5.5)
+                continue
             for gi, (g, _) in enumerate(GROUPS[1:], start=1):
                 mk = stars(mannwhitneyu(vals[g], vals["WT"]).pvalue)
                 if g == "LD leptin":
