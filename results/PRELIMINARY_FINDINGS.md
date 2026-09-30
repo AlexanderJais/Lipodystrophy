@@ -1,4 +1,4 @@
-# Preliminary cross-contrast findings (hypothalamus RNA-seq)
+# Preliminary cross-contrast findings (superseded by manuscript/results_and_legends.md)
 
 Inputs: six DESeq2 DEG lists (`data/`), pre-filtered at padj < 0.1 and |log2FC| > 0.2.
 Reproduce with `python3 scripts/cross_contrast.py` → tables in `results/`.

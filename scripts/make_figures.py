@@ -172,7 +172,7 @@ def figure1(deg):
     panel_letter(ax_b, "b", dx=-0.30, dy=1.02)
     size_colour_legends(fig, norm, [0.885, 0.62, 0.09, 0.022],
                         [0.855, 0.36, 0.14, 0.14])
-    save(fig, "Fig1_energy_deficit")
+    save(fig, "Fig3_energy_deficit")
 
 
 def figure2(deg):
@@ -216,7 +216,7 @@ def figure2(deg):
 
     size_colour_legends(fig, norm, [0.68, 0.30, 0.22, 0.02],
                         [0.64, 0.14, 0.30, 0.10], vlim=1.0)
-    save(fig, "Fig2_myelin_persistence")
+    save(fig, "Fig4_myelin_persistence")
 
 
 CORE = [
@@ -258,14 +258,12 @@ def figure3(deg):
 
     size_colour_legends(fig, norm, [0.63, 0.20, 0.19, 0.022],
                         [0.58, 0.02, 0.30, 0.10], vlim=1.0)
-    save(fig, "Fig3_sex_conserved_core_and_lipid")
+    save(fig, "Fig6_glial_core_lipid_synthesis")
 
 
-def figure0():
-    """Study design: three groups and the three comparisons."""
+def draw_design(ax):
+    """Study design: three groups and the three comparisons (axes in mm-like units)."""
     from matplotlib.patches import FancyArrowPatch, FancyBboxPatch
-    fig = plt.figure(figsize=(120 * MM, 62 * MM))
-    ax = fig.add_axes([0, 0, 1, 1])
     ax.set_xlim(0, 120)
     ax.set_ylim(0, 62)
     ax.axis("off")
@@ -279,8 +277,8 @@ def figure0():
         ax.add_patch(FancyBboxPatch((x - w / 2, y - h / 2), w, h,
                                     boxstyle="round,pad=0,rounding_size=1.5",
                                     fc="white", ec=INK, lw=0.6))
-        ax.text(x, y + 2.4, name, ha="center", va="center", fontsize=8)
-        ax.text(x, y - 2.6, geno, ha="center", va="center", fontsize=6.5)
+        ax.text(x, y + 2.4, name, ha="center", va="center", fontsize=7.5)
+        ax.text(x, y - 2.6, geno, ha="center", va="center", fontsize=6)
 
     def arrow(a, b, label, rot, off):
         (x1, y1), (x2, y2) = a, b
@@ -288,7 +286,7 @@ def figure0():
                                      mutation_scale=6, lw=0.6, color=INK,
                                      shrinkA=0, shrinkB=0))
         mx, my = (x1 + x2) / 2 + off[0], (y1 + y2) / 2 + off[1]
-        ax.text(mx, my, label, ha="center", va="center", fontsize=7,
+        ax.text(mx, my, label, ha="center", va="center", fontsize=6.5,
                 rotation=rot, rotation_mode="anchor")
 
     arrow((22, 17.5), (45, 39), "Lipodystrophy effect\nLD saline vs WT",
@@ -298,9 +296,7 @@ def figure0():
     arrow((37.5, 10), (82.5, 10), "Leptin effect\nLD saline vs LD leptin",
           0, (0, -6.5))
     ax.text(60, 25, "Hypothalamus\nbulk RNA-seq\nmales and females",
-            ha="center", va="center", fontsize=6.5, color=INK,
-            linespacing=1.3)
-    save(fig, "Fig0_study_design")
+            ha="center", va="center", fontsize=6, linespacing=1.3)
 
 
 STAGES = [
@@ -382,7 +378,7 @@ def figure4(deg):
 
     size_colour_legends(fig, norm, [0.08, 0.53, 0.14, 0.018],
                         [0.27, 0.49, 0.18, 0.08], vlim=1.0)
-    save(fig, "Fig4_oligodendrocyte_maturation")
+    save(fig, "Fig5_oligodendrocyte_maturation")
 
 
 BODY = [("Weight", "Body weight (g)"), ("VAT", "VAT (mg)"), ("SAT", "SAT (mg)"),
@@ -400,19 +396,14 @@ def stars(p):
             else "*" if p < 0.05 else "")
 
 
-def figure_body(measures=BODY, name="Fig_body_phenotype", grid=(3, 3),
-                height=150, week=14):
+def phenotype_panels(axes, measures, letters, week=14):
+    """Per-mouse dot plots, females and males side by side, week of the RNA-seq cohort."""
     from scipy.stats import mannwhitneyu
     ph = pd.read_csv(DATA / "phenotype_extracted.csv")
     ph = ph[ph.week == week]
-    fig, axes = plt.subplots(*grid, figsize=(180 * MM, height * MM),
-                             squeeze=False)
-    top_margin = 1 - 12 / height
-    fig.subplots_adjust(left=0.08, right=0.98, top=top_margin, bottom=0.05 * 150 / height,
-                        wspace=0.45, hspace=0.32)
     rng = np.random.default_rng(3)
-    for k, (ax, (m, ylab)) in enumerate(zip(axes.flat, measures)):
-        panel_letter(ax, "abcdefghi"[k], dx=-0.25, dy=1.0)
+    for ax, (m, ylab), letter in zip(axes, measures, letters):
+        panel_letter(ax, letter, dx=-0.25, dy=1.0)
         top = ph[ph.measure == m].value.max()
         for si, sex in enumerate(("female", "male")):
             vals = {}
@@ -441,11 +432,44 @@ def figure_body(measures=BODY, name="Fig_body_phenotype", grid=(3, 3),
         ax.set_xticklabels(["Female", "Male"])
         ax.tick_params(axis="x", length=0)
         ax.set_ylabel(ylab)
+
+
+def group_legend(fig, y):
     handles = [Line2D([], [], ls="", marker="o", mfc=c, mec="none", ms=3.5)
                for _, c in GROUPS]
     fig.legend(handles, [g for g, _ in GROUPS], ncol=3, frameon=False,
-               loc="upper center", bbox_to_anchor=(0.5, 1.0), handletextpad=0.1)
-    save(fig, name)
+               loc="upper center", bbox_to_anchor=(0.5, y), handletextpad=0.1)
+
+
+def fig1_design_adipose():
+    fig = plt.figure(figsize=(180 * MM, 112 * MM))
+    ax_d = fig.add_axes([0.2, 0.47, 0.6, 0.53])
+    draw_design(ax_d)
+    panel_letter(ax_d, "a", dx=-0.25, dy=0.95)
+    axes = [fig.add_axes([0.08 + i * 0.33, 0.05, 0.24, 0.32]) for i in range(3)]
+    phenotype_panels(axes, BODY[:3], "bcd")
+    group_legend(fig, 0.47)
+    save(fig, "Fig1_design_adipose")
+
+
+def fig2_metabolic():
+    fig, axes = plt.subplots(2, 3, figsize=(180 * MM, 110 * MM))
+    fig.subplots_adjust(left=0.08, right=0.98, top=0.89, bottom=0.07,
+                        wspace=0.45, hspace=0.32)
+    measures = [BODY[3], BODY[4], BODY[7]] + LIPIDS
+    phenotype_panels(axes.flat, measures, "abcdef")
+    group_legend(fig, 1.0)
+    save(fig, "Fig2_liver_lipoproteins")
+
+
+def figS1_ffa_glucose():
+    fig, axes = plt.subplots(1, 3, figsize=(180 * MM, 62 * MM))
+    fig.subplots_adjust(left=0.08, right=0.98, top=0.80, bottom=0.12,
+                        wspace=0.45)
+    phenotype_panels(axes[:2], [BODY[6], BODY[8]], "ab")
+    axes[2].axis("off")
+    group_legend(fig, 1.0)
+    save(fig, "FigS1_fatty_acids_glucose")
 
 
 def save(fig, name):
@@ -456,14 +480,11 @@ def save(fig, name):
 
 if __name__ == "__main__":
     deg = load()
-    figure0()
-    figure1(deg)
-    figure2(deg)
-    figure3(deg)
-    figure4(deg)
-    figure_body()
-    figure_body(BODY[:3], "Fig_body_weight_fat", (1, 3), 62)
-    figure_body(BODY[3:], "Fig_metabolic_phenotype", (2, 3), 110)
-    figure_body([BODY[i] for i in (3, 4, 7)], "Fig_liver", (1, 3), 62)
-    figure_body(LIPIDS, "Fig_lipoproteins", (1, 3), 62)
+    fig1_design_adipose()
+    fig2_metabolic()
+    figure1(deg)   # Fig. 3
+    figure2(deg)   # Fig. 4
+    figure4(deg)   # Fig. 5
+    figure3(deg)   # Fig. 6
+    figS1_ffa_glucose()
     print("written to", OUT)
