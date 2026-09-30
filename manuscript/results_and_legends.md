@@ -6,10 +6,10 @@ We studied lipodystrophic *Ldlr*−/−;aP2-nSrebp1c-Tg mice (LD) treated with s
 
 In contrast, metreleptin corrected most of the metabolic consequences of lipodystrophy:
 
-- **Liver weight:** increased 2.5-fold in saline-treated LD mice and reduced by metreleptin (Fig. 2a).
+- **Liver weight:** increased 2.5-fold in saline-treated LD mice and reduced by metreleptin, significantly in females (Fig. 2a).
 - **Plasma triglycerides:** increased 5-fold in saline-treated LD females and normalized by metreleptin. Saline-treated LD males had a similar median increase, but values were bimodal and the difference was not significant (Fig. 2b).
-- **ALAT:** increased 5–7-fold in saline-treated LD mice and reduced by metreleptin in both sexes, although it remained above WT (Fig. 2c).
-- **Triglyceride-rich lipoproteins:** VLDL and LDL triglycerides were increased 3–6-fold in saline-treated LD mice and returned to WT levels with metreleptin (Fig. 2d,e).
+- **ALAT:** increased 6–7-fold in saline-treated LD mice and reduced by metreleptin in both sexes, although it remained above WT (Fig. 2c).
+- **Triglyceride-rich lipoproteins:** VLDL and LDL triglycerides were increased 3–6-fold in saline-treated LD mice and did not differ from WT under metreleptin (Fig. 2d,e).
 - **Free fatty acids:** increased in saline-treated LD females and normalized by metreleptin (Supplementary Fig. 1a).
 
 HDL cholesterol changed in opposite directions in the two sexes. It was increased in saline-treated LD females and normalized by metreleptin, whereas it was decreased in saline-treated LD males (Fig. 2f). Plasma glucose did not differ between groups (Supplementary Fig. 1b). Thus, metreleptin was metabolically effective, whereas adipose tissue loss persisted.
