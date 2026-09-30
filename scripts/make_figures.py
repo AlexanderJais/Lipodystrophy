@@ -83,12 +83,8 @@ def dot_heatmap(ax, deg, modules, columns, vlim=2.0):
     ax.tick_params(axis="y", length=0, pad=2)
     for s in ax.spines.values():
         s.set_visible(False)
-    for k, (name, a, b) in enumerate(bounds):
-        if k:
-            ax.axhline(a - 0.5, color=RULE, lw=0.4, zorder=1)
-        ax.annotate(name, xy=(len(columns) - 0.35, (a + b) / 2),
-                    xycoords="data", ha="left", va="center", fontsize=5.5,
-                    color=MUTED, annotation_clip=False)
+    for name, a, b in bounds[1:]:
+        ax.axhline(a - 0.5, color=RULE, lw=0.4, zorder=1)
     return norm
 
 
@@ -167,10 +163,9 @@ def figure1(deg):
     ax_b = fig.add_axes([0.56, 0.12, 0.22, 0.78])
     cols = [("male", c) for c in COMPS]
     norm = dot_heatmap(ax_b, deg, ENERGY, cols, vlim=2.0)
-    ax_b.set_title("Male hypothalamus", loc="left", fontweight="bold", pad=4)
     panel_letter(ax_b, "b", dx=-0.30, dy=1.02)
-    size_colour_legends(fig, norm, [0.885, 0.62, 0.09, 0.022],
-                        [0.855, 0.36, 0.14, 0.14])
+    size_colour_legends(fig, norm, [0.815, 0.62, 0.09, 0.022],
+                        [0.79, 0.36, 0.14, 0.14])
     save(fig, "Fig1_energy_deficit")
 
 
@@ -198,30 +193,17 @@ def figure2(deg):
     ax_b.axhline(0, color=RULE, lw=0.4, zorder=1)
     ax_b.axvline(0, color=RULE, lw=0.4, zorder=1)
     ax_b.scatter(x[~is_my], y[~is_my], s=7, c="#9a9a9a", lw=0.3,
-                 edgecolors="white", zorder=2, label="Other shared DEGs")
+                 edgecolors="white", zorder=2)
     ax_b.scatter(x[is_my], y[is_my], s=11, c=DOWN, lw=0.3, edgecolors="white",
-                 zorder=3, label="Oligodendrocyte / myelin")
-    offsets = {"Mbp": (12, -14), "Plp1": (-22, 16), "Mog": (4, 20),
-               "Sox10": (18, 8), "Ugt8a": (-14, 16), "Gjc2": (-12, -14),
-               "Enpp6": (8, -8)}
-    for g, off in offsets.items():
-        ax_b.annotate(g, (x[g], y[g]), xytext=off, textcoords="offset points",
-                      fontsize=5, fontstyle="italic", color=INK, ha="center",
-                      va="center", arrowprops=dict(arrowstyle="-", lw=0.35,
-                                                   color=MUTED, shrinkA=0,
-                                                   shrinkB=1.5))
+                 zorder=3)
     r = np.corrcoef(x, y)[0, 1]
-    ax_b.text(0.04, 0.96, f"n = {len(x)} shared DEGs\nPearson r = {r:.2f}",
+    ax_b.text(0.04, 0.96, f"r = {r:.2f}",
               transform=ax_b.transAxes, va="top", fontsize=5.5)
     ax_b.set_xlim(lim)
     ax_b.set_ylim(lim)
     ax_b.set_aspect("equal")
     ax_b.set_xlabel("log$_2$ FC, LD saline vs WT")
     ax_b.set_ylabel("log$_2$ FC, LD leptin vs WT")
-    ax_b.legend(loc="lower right", frameon=False, handletextpad=0.1,
-                borderaxespad=0.2)
-    ax_b.set_title("Male: genotype effect persists under metreleptin",
-                   loc="left", fontweight="bold", pad=4)
     panel_letter(ax_b, "b", dx=-0.17, dy=1.03)
 
     size_colour_legends(fig, norm, [0.68, 0.30, 0.22, 0.02],
