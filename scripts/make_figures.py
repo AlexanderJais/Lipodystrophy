@@ -318,45 +318,51 @@ OL_TFS = [("OL transcription\nfactors", ["Olig1", "Olig2", "Sox10", "Sox8",
                                           "Myrf", "Zeb2", "Qki"])]
 
 
-def stage_bars(ax, deg):
-    x = np.arange(len(STAGES))
+def stage_strip(ax, deg):
+    """log2FC of each stage marker; markers not in a DEG list sit in an n.s. band."""
     series = (("LDsaline_WT", DOWN, "LD saline vs WT"),
               ("LDleptin_WT", "#8FB3D9", "LD leptin vs WT"),
               ("LDsaline_LDleptin", "#E3A1A9", "LD saline vs LD leptin"))
-    for k, (c, col, lab) in enumerate(series):
-        d = deg[("male", c)].log2FoldChange
-        # negative log2FC: lower than WT, or (last series) lower in saline
-        # than leptin, i.e. raised by metreleptin
-        frac = [100 * sum(g in d.index and d[g] < 0 for g in gs) / len(gs)
-                for _, gs in STAGES]
-        xs = x + (k - 1) * 0.27
-        ax.bar(xs, [-f for f in frac], width=0.25, color=col, lw=0,
-               label=lab)
-        for xi, f in zip(xs, frac):
-            if f == 0:
-                ax.text(xi, -1.5, "0", ha="center", va="top", fontsize=5)
+    ns_y = 0.22
+    rng = np.random.default_rng(1)
+    for si, (_, gs) in enumerate(STAGES):
+        jit = rng.uniform(-0.07, 0.07, len(gs))
+        for k, (c, col, lab) in enumerate(series):
+            d = deg[("male", c)].log2FoldChange
+            xc = si + (k - 1) * 0.28
+            for g, dx in zip(gs, jit):
+                if g in d.index:
+                    ax.scatter(xc + dx, d[g], s=9, c=col, lw=0.3,
+                               edgecolors=INK, zorder=3)
+                else:
+                    ax.scatter(xc + dx, ns_y, s=4, facecolors="none",
+                               edgecolors=RULE, lw=0.5, zorder=2)
     ax.axhline(0, color=INK, lw=0.5)
     ax.spines["bottom"].set_visible(False)
     ax.xaxis.tick_top()
     ax.tick_params(axis="x", length=0, pad=3)
-    ax.set_xticks(x)
+    ax.set_xticks(range(len(STAGES)))
     ax.set_xticklabels([n for n, _ in STAGES])
-    ax.set_ylim(-100, 0)
-    ax.set_yticks([-100, -75, -50, -25, 0])
-    ax.set_ylabel("Stage-specific marker genes (%)")
-    ax.legend(frameon=False, loc="lower left", handlelength=1,
+    ax.set_xlim(-0.55, len(STAGES) - 0.45)
+    ax.set_ylim(-1.4, 0.34)
+    ax.set_yticks([-1.2, -0.8, -0.4, 0, ns_y])
+    ax.set_yticklabels(["\u22121.2", "\u22120.8", "\u22120.4", "0", "n.s."])
+    ax.set_ylabel("log$_2$ fold change")
+    handles = [Line2D([], [], ls="", marker="o", mfc=col, mec=INK, mew=0.3,
+                      ms=3) for _, col, _ in series]
+    ax.legend(handles, [lab for _, _, lab in series], frameon=False, loc="lower left", handletextpad=0.1,
               borderaxespad=0.3)
-    ax.annotate("", xy=(len(STAGES) - 0.6, 16), xytext=(-0.4, 16),
+    ax.annotate("", xy=(len(STAGES) - 0.6, 0.62), xytext=(-0.4, 0.62),
                 xycoords="data", annotation_clip=False,
                 arrowprops=dict(arrowstyle="->", lw=0.5, color=INK))
-    ax.text((len(STAGES) - 1) / 2, 18, "Differentiation", ha="center",
+    ax.text((len(STAGES) - 1) / 2, 0.66, "Differentiation", ha="center",
             va="bottom", fontsize=5.5)
 
 
 def figure4(deg):
     fig = plt.figure(figsize=(180 * MM, 130 * MM))
     ax_a = fig.add_axes([0.08, 0.62, 0.26, 0.26])
-    stage_bars(ax_a, deg)
+    stage_strip(ax_a, deg)
     ax_a.text(0.0, 1.30, "Male", transform=ax_a.transAxes, fontsize=6.5,
               va="bottom")
     panel_letter(ax_a, "a", dx=-0.22, dy=1.30)
