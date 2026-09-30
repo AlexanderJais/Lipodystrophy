@@ -389,6 +389,9 @@ BODY = [("Weight", "Body weight (g)"), ("VAT", "VAT (mg)"), ("SAT", "SAT (mg)"),
         ("Liver", "Liver (mg)"), ("Triglycerides", "Triglycerides"),
         ("VLDL triglycerides", "VLDL triglycerides"), ("fFA", "Free fatty acids"),
         ("ALAT", "ALAT"), ("Glucose", "Glucose")]
+LIPIDS = [("VLDL triglycerides", "VLDL triglycerides"),
+          ("LDL triglycerides", "LDL triglycerides"),
+          ("HDL cholesterol", "HDL cholesterol")]
 GROUPS = [("WT", INK), ("LD saline", UP), ("LD leptin", DOWN)]
 
 
@@ -462,4 +465,5 @@ if __name__ == "__main__":
     figure_body(BODY[:3], "Fig_body_weight_fat", (1, 3), 62)
     figure_body(BODY[3:], "Fig_metabolic_phenotype", (2, 3), 110)
     figure_body([BODY[i] for i in (3, 4, 7)], "Fig_liver", (1, 3), 62)
+    figure_body(LIPIDS, "Fig_lipoproteins", (1, 3), 62)
     print("written to", OUT)
