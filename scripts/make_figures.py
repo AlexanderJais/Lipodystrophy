@@ -20,7 +20,7 @@ DATA, OUT = ROOT / "data", ROOT / "figures"
 OUT.mkdir(exist_ok=True)
 
 MM = 1 / 25.4
-INK, MUTED, RULE = "#1a1a1a", "#6b6b6b", "#bdbdbd"
+INK, RULE = "#1a1a1a", "#bdbdbd"
 DOWN, MID, UP = "#1D4E89", "#F2F2F0", "#A4243B"
 CMAP = LinearSegmentedColormap.from_list(
     "div", ["#0F2F57", DOWN, "#8FB3D9", MID, "#E3A1A9", UP, "#5E0F1E"])
@@ -90,7 +90,7 @@ def dot_heatmap(ax, deg, modules, columns, vlim=2.0):
             ax.axhline(a - 0.5, color=RULE, lw=0.4, zorder=1)
         ax.annotate(name, xy=(len(columns) - 0.35, (a + b) / 2),
                     xycoords="data", ha="left", va="center", fontsize=5.5,
-                    color=MUTED, annotation_clip=False)
+                    color=INK, annotation_clip=False)
     return norm
 
 
@@ -131,7 +131,7 @@ def deg_counts(ax, deg, sex):
     ax.set_xlabel("DEGs (down | up)")
     ax.spines["left"].set_visible(False)
     ax.tick_params(axis="y", length=0)
-    ax.set_title(sex.capitalize(), loc="left", fontweight="bold")
+    ax.set_title(sex.capitalize(), loc="left")
 
 
 ENERGY = [
@@ -182,7 +182,7 @@ def figure2(deg):
     norm = dot_heatmap(ax_a, deg, MYELIN, cols, vlim=1.0)
     ax_a.axvline(2.5, color=INK, lw=0.5)
     for x, s in ((1, "Male"), (4, "Female")):
-        ax_a.text(x, -1.6, s, ha="center", va="bottom", fontweight="bold",
+        ax_a.text(x, -1.6, s, ha="center", va="bottom",
                   fontsize=6.5)
     ax_a.set_xticklabels([LABEL[c] for _, c in cols], fontsize=5)
     panel_letter(ax_a, "a", dx=-0.13, dy=1.04)
@@ -242,7 +242,7 @@ def figure3(deg):
     ax_a.axvline(2.5, color=INK, lw=0.5)
     ax_a.set_xticklabels([LABEL[c] for _, c in cols_a], fontsize=5)
     for x, sx in ((1, "Male"), (4, "Female")):
-        ax_a.text(x, -1.3, sx, ha="center", va="bottom", fontweight="bold",
+        ax_a.text(x, -1.3, sx, ha="center", va="bottom",
                   fontsize=6.5)
     panel_letter(ax_a, "a", dx=-0.2, dy=1.04)
 
@@ -252,7 +252,7 @@ def figure3(deg):
     ax_b.axvline(2.5, color=INK, lw=0.5)
     ax_b.set_xticklabels([LABEL[c] for _, c in cols_b], fontsize=4.6)
     for x, sx in ((1, "Male"), (4, "Female")):
-        ax_b.text(x, -1.3, sx, ha="center", va="bottom", fontweight="bold",
+        ax_b.text(x, -1.3, sx, ha="center", va="bottom",
                   fontsize=6.5)
     panel_letter(ax_b, "b", dx=-0.12, dy=1.08)
 
@@ -271,20 +271,16 @@ def figure0():
     ax.axis("off")
     w, h = 30, 14
     groups = {
-        "WT": (60, 46, "WT", "$\\it{Ldlr}^{-/-}$", ""),
-        "sal": (22, 10, "LD saline", "$\\it{Ldlr}^{-/-}$; aP2-nSrebp1c-Tg", "Saline"),
-        "lep": (98, 10, "LD leptin", "$\\it{Ldlr}^{-/-}$; aP2-nSrebp1c-Tg", "Metreleptin"),
+        "WT": (60, 46, "WT", "$\\it{Ldlr}^{-/-}$"),
+        "sal": (22, 10, "LD saline", "$\\it{Ldlr}^{-/-}$; aP2-nSrebp1c-Tg"),
+        "lep": (98, 10, "LD leptin", "$\\it{Ldlr}^{-/-}$; aP2-nSrebp1c-Tg"),
     }
-    for x, y, name, geno, tx in groups.values():
+    for x, y, name, geno in groups.values():
         ax.add_patch(FancyBboxPatch((x - w / 2, y - h / 2), w, h,
                                     boxstyle="round,pad=0,rounding_size=1.5",
                                     fc="white", ec=INK, lw=0.6))
-        dy = 0 if tx else -1.6
-        ax.text(x, y + 3.2 + dy, name, ha="center", va="center", fontsize=7,
-                fontweight="bold")
-        ax.text(x, y - 0.6 + dy, geno, ha="center", va="center", fontsize=5)
-        ax.text(x, y - 3.9, tx, ha="center", va="center", fontsize=5,
-                color=MUTED)
+        ax.text(x, y + 2.4, name, ha="center", va="center", fontsize=8)
+        ax.text(x, y - 2.6, geno, ha="center", va="center", fontsize=6.5)
 
     def arrow(a, b, label, rot, off):
         (x1, y1), (x2, y2) = a, b
@@ -292,7 +288,7 @@ def figure0():
                                      mutation_scale=6, lw=0.6, color=INK,
                                      shrinkA=0, shrinkB=0))
         mx, my = (x1 + x2) / 2 + off[0], (y1 + y2) / 2 + off[1]
-        ax.text(mx, my, label, ha="center", va="center", fontsize=6,
+        ax.text(mx, my, label, ha="center", va="center", fontsize=7,
                 rotation=rot, rotation_mode="anchor")
 
     arrow((22, 17.5), (45, 39), "Lipodystrophy effect\nLD saline vs WT",
@@ -302,7 +298,7 @@ def figure0():
     arrow((37.5, 10), (82.5, 10), "Leptin effect\nLD saline vs LD leptin",
           0, (0, -6.5))
     ax.text(60, 25, "Hypothalamus\nbulk RNA-seq\nmales and females",
-            ha="center", va="center", fontsize=5, color=MUTED,
+            ha="center", va="center", fontsize=6.5, color=INK,
             linespacing=1.3)
     save(fig, "Fig0_study_design")
 
