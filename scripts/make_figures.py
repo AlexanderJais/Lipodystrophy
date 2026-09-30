@@ -397,15 +397,18 @@ def stars(p):
             else "*" if p < 0.05 else "")
 
 
-def figure_body(week=16):
+def figure_body(measures=BODY, name="Fig_body_phenotype", grid=(3, 3),
+                height=150, week=16):
     from scipy.stats import mannwhitneyu
     ph = pd.read_csv(DATA / "phenotype_extracted.csv")
     ph = ph[ph.week == week]
-    fig, axes = plt.subplots(3, 3, figsize=(180 * MM, 150 * MM))
-    fig.subplots_adjust(left=0.08, right=0.98, top=0.93, bottom=0.05,
+    fig, axes = plt.subplots(*grid, figsize=(180 * MM, height * MM),
+                             squeeze=False)
+    top_margin = 1 - 12 / height
+    fig.subplots_adjust(left=0.08, right=0.98, top=top_margin, bottom=0.05 * 150 / height,
                         wspace=0.45, hspace=0.32)
     rng = np.random.default_rng(3)
-    for k, (ax, (m, ylab)) in enumerate(zip(axes.flat, BODY)):
+    for k, (ax, (m, ylab)) in enumerate(zip(axes.flat, measures)):
         panel_letter(ax, "abcdefghi"[k], dx=-0.25, dy=1.0)
         top = ph[ph.measure == m].value.max()
         for si, sex in enumerate(("female", "male")):
@@ -435,7 +438,7 @@ def figure_body(week=16):
                for _, c in GROUPS]
     fig.legend(handles, [g for g, _ in GROUPS], ncol=3, frameon=False,
                loc="upper center", bbox_to_anchor=(0.5, 1.0), handletextpad=0.1)
-    save(fig, "Fig_body_phenotype")
+    save(fig, name)
 
 
 def save(fig, name):
@@ -452,4 +455,5 @@ if __name__ == "__main__":
     figure3(deg)
     figure4(deg)
     figure_body()
+    figure_body(BODY[:3], "Fig_body_weight_fat", (1, 3), 62)
     print("written to", OUT)
