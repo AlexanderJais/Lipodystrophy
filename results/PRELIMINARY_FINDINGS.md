@@ -48,3 +48,15 @@ Reproduce with `python3 scripts/cross_contrast.py` → tables in `results/`.
   Ch25h/Nlrp3 below threshold, and do GSEA on the myelin set.
 - Normalised counts per sample + sample sheet (sex, group, batch, dissection date) for a
   sex × genotype × treatment model and interaction test for leptin rescue.
+
+## Data-supported narrative (draft)
+1. **Leptin-reversible hypothalamic "starvation state" (male-dominant).** In saline-treated LD mice:
+   Agrp/Npy up; glucocorticoid-target genes up (Fkbp5, Zbtb16, Cdkn1a, Sult1a1, Plin4, Hif3a);
+   cold-inducible Rbm3/Cirbp up (Rbm3 also in females), consistent with hypothermia; endothelial
+   activation (Vwf, Icam1, Serpine1, Pecam1, Nos3, Klf4, Osmr). None persist in LDleptin vs WT;
+   Icam1, Tgm2, Anxa3, Sgk3 are directly lower with leptin.
+2. **Leptin-independent glial deficit.** Oligodendrocyte/myelin genes plus astrocyte genes
+   (Il33, Aqp4, Fabp7, Car2, Gpr37l1) are reduced; in males this persists unchanged under
+   metreleptin (r = 0.98). Females show the same direction, milder, and without direct rescue.
+3. **Target engagement.** Socs3 and Nhlh2 (leptin-induced arcuate genes) up in leptin-treated males.
+4. **Sex difference.** Males 456 DEGs vs females 62.
