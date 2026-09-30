@@ -1,0 +1,153 @@
+
+## male_saline_up (137 genes)
+  [PanglaoDB] Endothelial Cells | q=8.3e-06 | PTPRB;SPARC;VWF;NOS3;ADGRF5;SLC2A1;PECAM1;IGFBP7;TNS2;ICAM1;TNS1;MFSD2A
+  [PanglaoDB] Pericytes | q=8.3e-06 | ECM1;SPARC;COL4A2;ELN;ADGRF5;PECAM1;GLI1;TNS2;ICAM1;TNS1
+  [PanglaoDB] Endothelial Cells (Aorta) | q=2.5e-05 | SULT1A1;PER3;COL4A2;LAMB2;MARVELD1;NOS3;SMOC1;ADGRF5;IGFBP7;TNS2
+  [PanglaoDB] Peritubular Myoid Cells | q=4.8e-05 | COL4A2;LAMC3;LAMB2;ELN;ADGRF5;MYH11;TNS2;TNS1
+  [PanglaoDB] Adipocytes | q=4.8e-05 | SULT1A1;IL1R1;ZBTB16;ADGRF5;IGFBP7;SLC2A4;LBP;AGT;TNS2;TNS1
+  [PanglaoDB] Loop Of Henle Cells | q=1.7e-04 | KCNT1;VWF;COL4A2;LAMB2;ADGRF5;IGFBP7;TNS2;TNS1
+  [WikiPathways] Focal Adhesion-PI3K-Akt-mTOR-signaling pathway WP2841 | q=5.7e-03 | CDKN1A;VWF;COL4A2;LAMB2;LAMC3;NOS3;SLC2A1;SLC2A4;HIF3A;OSMR
+  [WikiPathways] Focal Adhesion WP85 | q=4.0e-02 | VWF;COL4A2;LAMB2;LAMC3;FLNA;MAPK4
+  [WikiPathways] Adipogenesis genes WP447 | q=4.0e-02 | SERPINE1;NDN;AGRP;SLC2A4;AGT
+  [KEGG] Adipocytokine signaling pathway | q=2.2e-02 | NPY;SLC2A1;AGRP;SLC2A4;ACACB
+  [KEGG] ECM-receptor interaction | q=2.3e-02 | VWF;COL4A2;LAMC3;LAMB2;COL9A2
+  [KEGG] Focal adhesion | q=2.6e-02 | VWF;COL4A2;LAMB2;LAMC3;FLNA;FLNB;COL9A2
+  [KEGG] Insulin resistance | q=2.8e-02 | NOS3;SLC2A1;SLC2A4;ACACB;AGT
+  [KEGG] PI3K-Akt signaling pathway | q=2.8e-02 | CDKN1A;VWF;COL4A2;LAMB2;LAMC3;NOS3;SGK3;COL9A2;OSMR
+  [KEGG] AGE-RAGE signaling pathway in diabetic complications | q=2.8e-02 | COL4A2;NOS3;SERPINE1;AGT;ICAM1
+  [GO] Skeletal System Development (GO:0001501) | q=4.8e-02 | COL18A1;ZBTB16;UFD1;COL9A2;BMP7;PKD1;TGM2
+  [GO] Regulation Of Angiogenesis (GO:0045765) | q=4.8e-02 | ECM1;SPARC;COL4A2;ANXA3;NOS3;SERPINE1;ISM1;KLF4
+
+## male_saline_down (308 genes)
+  [PanglaoDB] Oligodendrocytes | q=3.3e-59 | TMEM151A;ITGB4;NCAN;AQP4;DUSP15;ADAMTS4;GRM3;GRM5;KIF13B;SOX8;ENPP6;BCAS1;GPR37;OPALIN;PLL
+  [PanglaoDB] Schwann Cells | q=5.8e-17 | NGFR;PHLDB1;CNP;MEGF10;ITGB4;CMTM5;LGI3;PHYHIPL;AQP4;OLIG1;GPR37L1;PTN;S100B;SOX10;NDRG1;M
+  [PanglaoDB] Astrocytes | q=5.8e-17 | NCAN;PHYHIPL;AQP4;PTN;PLA2G7;GRM5;EDNRB;S1PR1;BAALC;GPM6B;KCNJ10;OPALIN;CMTM5;LGI3;ATP2B2;
+  [PanglaoDB] Bergmann Glia | q=3.0e-15 | KCNJ10;METRN;OPALIN;NCAN;NRXN3;PHYHIPL;AQP4;ATP2B2;GPR37L1;SEPTIN4;S100B;GRM3;GRM5;ZEB2;NF
+  [PanglaoDB] Oligodendrocyte Progenitor Cells | q=1.8e-12 | GPR17;CNP;MEGF10;NCAN;LGI3;PHYHIPL;AQP4;OLIG1;ATP2B2;GPR37L1;OLIG2;PTN;SOX10;SCRT1;ETV5;GP
+  [PanglaoDB] Enteric Glia Cells | q=2.9e-11 | MEGF10;LGI3;PHYHIPL;AQP4;PTN;S100B;SOX10;PTPRD;GPRC5B;NFASC;EDNRB;PLP1;CNTN2;RGS7BP;CRYAB;
+  [GO] Myelination (GO:0042552) | q=4.6e-06 | NFASC;MYRF;PLLP;PLP1;MAL;TPPP;SOX10;GPM6B;KLK6;BCAS1
+  [GO] Nervous System Development (GO:0007399) | q=2.6e-04 | MOG;LPAR1;PAX6;PROX1;PTN;S100B;SOX10;VEGFA;KLK6;TRAK2;ZEB2;NFASC;GJB1;EDNRB;MOBP;FEZ1;FABP
+  [GO] Glial Cell Differentiation (GO:0010001) | q=4.4e-04 | MYRF;METRN;NCAN;SOX8;TPPP;HAPLN4;SOX10
+  [GO] Axon Ensheathment In Central Nervous System (GO:0032291) | q=8.5e-04 | MYRF;PLP1;SOX10;GPM6B
+  [GO] Oligodendrocyte Development (GO:0014003) | q=1.2e-03 | MYRF;PLP1;TPPP;SOX10;GPM6B
+  [GO] Oligodendrocyte Differentiation (GO:0048709) | q=2.5e-03 | MYRF;SOX8;TPPP;SOX6;SOX10
+  [KEGG] GABAergic synapse | q=2.0e-03 | GABRB2;GABRA1;SLC32A1;GNG7;GAD1;SLC38A3;GNG11;GNAI1;TRAK2
+  [KEGG] Biosynthesis of unsaturated fatty acids | q=1.1e-02 | ELOVL5;SCD2;ELOVL6;HSD17B12;ELOVL7
+  [KEGG] Morphine addiction | q=2.6e-02 | GABRB2;GABRA1;SLC32A1;PDE1C;GNG7;GNG11;GNAI1
+  [KEGG] Retrograde endocannabinoid signaling | q=2.6e-02 | GABRB2;GABRA1;GRM5;NDUFS8;SLC32A1;GNG7;PLCB1;GNG11;GNAI1
+  [KEGG] Fatty acid elongation | q=3.1e-02 | ELOVL5;ELOVL6;HSD17B12;ELOVL7
+  [KEGG] Relaxin signaling pathway | q=3.1e-02 | EDNRB;CREB1;GNG7;PLCB1;GNG11;GNAI1;CREB5;VEGFA
+  [WikiPathways] G Protein Signaling Pathways WP232 | q=3.1e-02 | PDE1C;PRKD3;GNG7;GNA12;AKAP5;GNG11;GNAI1
+  [WikiPathways] Mecp2 and Associated Rett Syndrome WP2910 | q=3.1e-02 | MAG;CREB1;CNP;GAD1;MBP
+  [WikiPathways] GPCRs, Class C Metabotropic glutamate, pheromone WP327 | q=3.4e-02 | GRM3;GRM5;GPRC5B
+  [WikiPathways] Focal Adhesion-PI3K-Akt-mTOR-signaling pathway WP2841 | q=3.4e-02 | NGFR;PHLPP1;ITGB4;LPAR1;GNG11;VEGFA;PIK3C2B;CREB1;GNG7;PPARGC1A;FGF12;FGFR2;CREB5
+
+## male_normalized_up (120 genes)
+  [PanglaoDB] Endothelial Cells (Aorta) | q=1.7e-05 | SULT1A1;PER3;COL4A2;LAMB2;MARVELD1;NOS3;SMOC1;ADGRF5;IGFBP7;TNS2
+  [PanglaoDB] Endothelial Cells | q=1.7e-05 | PTPRB;VWF;NOS3;ADGRF5;SLC2A1;PECAM1;IGFBP7;TNS2;ICAM1;TNS1;MFSD2A
+  [PanglaoDB] Adipocytes | q=1.9e-05 | SULT1A1;IL1R1;ZBTB16;ADGRF5;IGFBP7;SLC2A4;LBP;AGT;TNS2;TNS1
+  [PanglaoDB] Peritubular Myoid Cells | q=1.9e-05 | COL4A2;LAMC3;LAMB2;ELN;ADGRF5;MYH11;TNS2;TNS1
+  [PanglaoDB] Sertoli Cells | q=1.0e-04 | DOCK6;NOTCH2;COL18A1;LAMB2;AGT;ADCY6;TNS2;TNS1
+  [PanglaoDB] Pericytes | q=1.0e-04 | ECM1;COL4A2;ELN;ADGRF5;PECAM1;TNS2;ICAM1;TNS1
+  [WikiPathways] Focal Adhesion-PI3K-Akt-mTOR-signaling pathway WP2841 | q=1.6e-03 | CDKN1A;VWF;COL4A2;LAMB2;LAMC3;NOS3;SLC2A1;SLC2A4;HIF3A;OSMR
+  [WikiPathways] Focal Adhesion WP85 | q=2.0e-02 | VWF;COL4A2;LAMB2;LAMC3;FLNA;MAPK4
+  [WikiPathways] Adipogenesis genes WP447 | q=2.0e-02 | SERPINE1;NDN;AGRP;SLC2A4;AGT
+  [KEGG] Adipocytokine signaling pathway | q=1.1e-02 | NPY;SLC2A1;AGRP;SLC2A4;ACACB
+  [KEGG] Focal adhesion | q=1.1e-02 | VWF;COL4A2;LAMB2;LAMC3;FLNA;FLNB;COL9A2
+  [KEGG] ECM-receptor interaction | q=1.1e-02 | VWF;COL4A2;LAMC3;LAMB2;COL9A2
+  [KEGG] PI3K-Akt signaling pathway | q=1.2e-02 | CDKN1A;VWF;COL4A2;LAMB2;LAMC3;NOS3;SGK3;COL9A2;OSMR
+  [KEGG] AGE-RAGE signaling pathway in diabetic complications | q=1.2e-02 | COL4A2;NOS3;SERPINE1;AGT;ICAM1
+  [KEGG] Insulin resistance | q=1.5e-02 | NOS3;SLC2A1;SLC2A4;ACACB;AGT
+  [GO] Skeletal System Development (GO:0001501) | q=3.4e-02 | COL18A1;ZBTB16;UFD1;COL9A2;BMP7;PKD1;TGM2
+
+## male_normalized_down (157 genes)
+  [PanglaoDB] Gamma (PP) Cells | q=6.6e-07 | PTPRD;NFASC;SEMA6D;PHYHIPL;AQP4;PAX6;SEMA3E;PROX1;PPARGC1A;FGF12;PAK5
+  [PanglaoDB] Astrocytes | q=2.3e-06 | GRM5;GPRC5B;NFASC;KCNJ10;S1PR1;BAALC;PHYHIPL;AQP4;GPR37L1;PLA2G7;CRYAB
+  [PanglaoDB] Oligodendrocytes | q=5.9e-06 | GPRC5B;DPY19L1;GRM5;KCNJ10;PHYHIPL;AQP4;SOX8;TPPP;DUSP15;EML1;FGFR2
+  [PanglaoDB] Müller Cells | q=5.9e-06 | PTPRD;TMEM47;GPRC5B;NFASC;KCNJ10;SEMA6D;AQP4;EDIL3;CRYAB;VEGFA
+  [PanglaoDB] Peri-islet Schwann Cells | q=5.9e-06 | TMEM47;GPRC5B;NFASC;TMEM98;SEMA6D;INSC;EML1;EDIL3;CHST3
+  [PanglaoDB] Radial Glia Cells | q=5.9e-06 | PTPRD;TMEM47;GPRC5B;NFASC;SEMA6D;PHYHIPL;AQP4;FAT3;PAX6
+  [KEGG] Biosynthesis of unsaturated fatty acids | q=1.8e-02 | ELOVL5;SCD2;ELOVL6;HSD17B12
+
+## male_persisting_down (151 genes)
+  [PanglaoDB] Oligodendrocytes | q=1.0e-58 | TMEM151A;TMEM63A;MYRF;ITGB4;NCAN;KLK6;GRM3;ADAMTS4;GJC3;TMEM125;GJC2;MOBP;KIF13B;MBP;ARSG;
+  [PanglaoDB] Schwann Cells | q=9.4e-16 | NGFR;PHLDB1;CNP;MEGF10;ITGB4;CMTM5;LGI3;OLIG1;PTN;S100B;SOX10;NDRG1;MAG;EDNRB;PLP1;CNTN2;A
+  [PanglaoDB] Bergmann Glia | q=5.1e-11 | OPALIN;NCAN;NRXN3;ATP2B2;SEPTIN4;S100B;GRM3;ZEB2;FABP7;PLP1;CNTN2;RGS7BP;GPM6B;RAPGEF4
+  [PanglaoDB] Astrocytes | q=3.2e-10 | OPALIN;CMTM5;LGI3;NCAN;ATP2B2;PTN;S100B;EDNRB;FABP7;PLP1;CNTN2;RGS7BP;GPM6B;RAPGEF4
+  [PanglaoDB] Oligodendrocyte Progenitor Cells | q=4.2e-09 | CNP;MEGF10;NCAN;LGI3;PLP1;CNTN2;OLIG1;ATP2B2;OLIG2;PTN;SOX10;SCRT1
+  [PanglaoDB] Enteric Glia Cells | q=1.5e-08 | EDNRB;MEGF10;LGI3;PLP1;CNTN2;RGS7BP;PTN;S100B;SOX10;GPM6B;RAPGEF4
+  [GO] Myelination (GO:0042552) | q=4.8e-05 | MYRF;PLLP;PLP1;SOX10;GPM6B;KLK6;BCAS1
+  [GO] Axon Ensheathment In Central Nervous System (GO:0032291) | q=4.8e-05 | MYRF;PLP1;SOX10;GPM6B
+  [GO] Central Nervous System Myelination (GO:0022010) | q=2.3e-04 | MYRF;PLP1;SOX10;GPM6B
+  [GO] Nervous System Development (GO:0007399) | q=2.3e-04 | MOG;LPAR1;PTN;S100B;SOX10;KLK6;TRAK2;ZEB2;GJB1;EDNRB;MOBP;FEZ1;FABP7;TYRO3;GPM6B
+  [GO] Oligodendrocyte Development (GO:0014003) | q=9.4e-04 | MYRF;PLP1;SOX10;GPM6B
+  [GO] Intermediate Filament Bundle Assembly (GO:0045110) | q=2.1e-03 | NEFL;NEFM;NEFH
+  [KEGG] GABAergic synapse | q=7.6e-03 | SLC32A1;GNG7;GAD1;SLC38A3;GNG11;TRAK2
+  [WikiPathways] Mecp2 and Associated Rett Syndrome WP2910 | q=1.6e-02 | MAG;CNP;GAD1;MBP
+  [WikiPathways] G Protein Signaling Pathways WP232 | q=1.6e-02 | PDE1C;GNG7;GNA12;AKAP5;GNG11
+  [WikiPathways] Neural Crest Differentiation WP2074 | q=1.7e-02 | GJB1;MBP;OLIG1;OLIG2;SOX10
+
+## male_leptin_only_up (46 genes)
+  [PanglaoDB] Neurons | q=2.6e-04 | SYNPR;CACNB3;NWD2;CACNA2D1;KCNMA1;RESP18;PRPH
+  [PanglaoDB] Trigeminal Neurons | q=1.1e-02 | SYNPR;AVIL;SCN7A;PRPH
+  [PanglaoDB] Retinal Ganglion Cells | q=1.2e-02 | NHLH2;CACNB3;TOX2;IRX5
+  [PanglaoDB] Anterior Pituitary Gland Cells | q=4.1e-02 | ADCYAP1;CACNA2D1;NKX2-1
+  [PanglaoDB] Alpha Cells | q=4.1e-02 | ADCYAP1;CACNA2D1;RESP18
+  [PanglaoDB] Ependymal Cells | q=4.1e-02 | DNAH2;HDC;CFAP54
+  [GO] Metal Ion Transport (GO:0030001) | q=1.6e-02 | KCNJ5;CACNB3;CACNA2D1;KCNMA1;SCN7A
+
+## male_leptin_only_down (79 genes)
+  [GO] Positive Regulation Of ERK1 And ERK2 Cascade (GO:0070374) | q=4.5e-04 | DDR1;CD74;PTK2B;ADRA1D;PRKCA;APOE;MT3;PDE8A
+  [GO] Regulation Of ERK1 And ERK2 Cascade (GO:0070372) | q=2.2e-03 | DDR1;CD74;PTK2B;ADRA1D;PRKCA;APOE;MT3;PDE8A
+  [GO] Regulation Of Monoatomic Ion Transmembrane Transporter Activity (GO:00 | q=2.2e-03 | RELN;STK39;PTK2B;SCN4B;SHISA6
+  [GO] Negative Regulation Of Potassium Ion Transport (GO:0043267) | q=2.7e-03 | STK39;PTK2B;VIP
+  [GO] Positive Regulation Of MAPK Cascade (GO:0043410) | q=5.2e-03 | DDR1;CD74;PTK2B;ADRA1D;PRKCA;APOE;MT3;PDE8A
+  [GO] Regulation Of Establishment Of Cell Polarity (GO:2000114) | q=5.5e-03 | PLEKHG3;GSN;PTK2B
+  [PanglaoDB] Astrocytes | q=3.4e-03 | SYNM;DAAM2;APOE;MT3;SCN4B;SHISA6
+  [PanglaoDB] Oligodendrocytes | q=3.5e-03 | EFNB3;DLG2;SEC14L5;MT3;PDE8A;SHISA6
+  [PanglaoDB] Choroid Plexus Cells | q=3.5e-03 | DDR1;TJP1;EFNB3;APOE;CGNL1
+  [PanglaoDB] Enteric Glia Cells | q=2.5e-02 | DAAM2;APOE;SCN4B;SHISA6
+  [PanglaoDB] Pulmonary Alveolar Type I Cells | q=2.9e-02 | DDR1;TJP1;S100A16;MET
+  [PanglaoDB] Olfactory Epithelial Cells | q=2.9e-02 | DDR1;EFNB3;SCN4B;ANO2;SPTBN2
+
+## female_saline_up (28 genes)
+  [WikiPathways] Calcium Regulation in the Cardiac Cell WP553 | q=9.3e-04 | PRKCG;CACNB3;CAMK2A;ADCY1
+  [WikiPathways] Myometrial Relaxation and Contraction Pathways WP385 | q=9.3e-04 | PRKCG;CACNB3;CAMK2A;ADCY1
+  [KEGG] Circadian entrainment | q=1.1e-03 | PRKCG;PER2;CAMK2A;ADCY1
+  [KEGG] Oxytocin signaling pathway | q=3.2e-03 | PRKCG;CACNB3;CAMK2A;ADCY1
+  [KEGG] Long-term potentiation | q=4.0e-03 | PRKCG;CAMK2A;ADCY1
+  [KEGG] Gastric acid secretion | q=4.0e-03 | PRKCG;CAMK2A;ADCY1
+  [KEGG] Insulin secretion | q=5.0e-03 | PRKCG;CAMK2A;ADCY1
+  [KEGG] Melanogenesis | q=5.9e-03 | PRKCG;CAMK2A;ADCY1
+  [PanglaoDB] Podocytes | q=5.3e-03 | PODXL;NR2F2;FAT4;ADCY1
+
+## female_saline_down (34 genes)
+  [PanglaoDB] Oligodendrocytes | q=6.1e-15 | CLDN11;ADAMTS4;IL33;DDC;GJC3;MOG;OLIG1;PRR18;AQP4;PLEKHH1;HAPLN2;BCAS1
+  [PanglaoDB] Schwann Cells | q=1.3e-04 | OLIG1;AQP4;GPR37L1;HAPLN2;BCAS1
+  [PanglaoDB] Noradrenergic Neurons | q=6.0e-04 | DDC;TH;DLK1;SLC18A2
+  [PanglaoDB] Adrenergic Neurons | q=6.0e-04 | DDC;TH;DLK1;SLC18A2
+  [PanglaoDB] Dopaminergic Neurons | q=7.5e-04 | DDC;TH;NTN1;SLC18A2
+  [PanglaoDB] Oligodendrocyte Progenitor Cells | q=7.6e-04 | OLIG1;AQP4;GPR37L1;HAPLN2
+  [WikiPathways] Dopaminergic Neurogenesis WP1498 | q=3.3e-08 | RET;DDC;TH;ALDH1A1;SLC18A2
+  [WikiPathways] SIDS Susceptibility Pathways WP1266 | q=1.7e-03 | RET;ADCYAP1;DDC
+  [WikiPathways] Amino Acid metabolism WP662 | q=3.2e-03 | DDC;TH;ALDH1A1
+  [KEGG] Cocaine addiction | q=3.5e-03 | DDC;TH;SLC18A2
+  [KEGG] Amphetamine addiction | q=4.9e-03 | DDC;TH;SLC18A2
+  [KEGG] Dopaminergic synapse | q=1.8e-02 | DDC;TH;SLC18A2
+  [KEGG] Alcoholism | q=3.6e-02 | DDC;TH;SLC18A2
+
+## female_saline_vs_leptin (34 genes)
+  [GO] Regulation Of Postsynaptic Neurotransmitter Receptor Activity (GO:0098 | q=1.3e-04 | DLGAP1;NPTX2;DLGAP2
+  [GO] Regulation Of Nervous System Process (GO:0031644) | q=6.1e-04 | DLGAP1;NPTX2;DLGAP2
+  [GO] Chemical Synaptic Transmission (GO:0007268) | q=6.7e-04 | CACNB3;DLGAP1;GRIK2;NPTX2;GRIN2B;DLGAP2
+  [GO] Anterograde Trans-Synaptic Signaling (GO:0098916) | q=1.7e-03 | CACNB3;DLGAP1;GRIK2;NPTX2;GRIN2B
+  [GO] Regulation Of Neurotransmitter Receptor Activity (GO:0099601) | q=3.1e-03 | DLGAP1;NPTX2;DLGAP2
+  [GO] Modulation Of Chemical Synaptic Transmission (GO:0050804) | q=3.1e-03 | DLGAP1;GRIK2;NPTX2;DLGAP2
+  [PanglaoDB] Podocytes | q=1.1e-03 | KANK1;PODXL;HTRA1;NR2F2;FAT4
+  [PanglaoDB] Interneurons | q=3.1e-03 | PRKCG;VGF;DLGAP1;RORB;FAM81A
+  [PanglaoDB] Astrocytes | q=3.1e-03 | GJB6;HTRA1;VIM;SLC16A2
+  [PanglaoDB] Beta Cells | q=3.1e-03 | UNC5D;CNTN4;NPTX2;DLK1
+  [PanglaoDB] Bergmann Glia | q=1.9e-02 | GJB6;VIM;GRIN2B
+  [PanglaoDB] Delta Cells | q=1.9e-02 | UNC5D;CNTN4;NPTX2
+  [KEGG] Glutamatergic synapse | q=3.4e-03 | PRKCG;DLGAP1;GRIK2;GRIN2B
+  [WikiPathways] Calcium Regulation in the Cardiac Cell WP553 | q=2.7e-02 | PRKCG;CACNB3;GJB6
