@@ -583,7 +583,7 @@ def network_modules(g, min_size=3):
     return sorted(mods, key=len, reverse=True)
 
 
-def draw_network(ax, name, color_col, ncol, vlim=1.0):
+def draw_network(ax, name, color_col, ncol, vlim=1.0, fs=7):
     import networkx as nx
     net = ROOT / "results" / "network"
     e = pd.read_csv(net / f"{name}_edges.csv")
@@ -593,7 +593,7 @@ def draw_network(ax, name, color_col, ncol, vlim=1.0):
     keep = set().union(*mods)
     pos = {}
     for k, m in enumerate(mods):
-        cx, cy = (k % ncol) * 1.25, -(k // ncol) * 1.15
+        cx, cy = (k % ncol) * 1.45, -(k // ncol) * 1.45
         sub = g.subgraph(m)
         if len(m) > 9:
             order = sorted(m, key=lambda n: -sub.degree(n))
@@ -602,21 +602,22 @@ def draw_network(ax, name, color_col, ncol, vlim=1.0):
             p = nx.kamada_kawai_layout(sub)
         else:
             p = nx.circular_layout(sub)
-        r = 0.46 if len(m) > 9 else 0.32 if len(m) > 4 else 0.25
+        r = 0.52 if len(m) > 9 else 0.44 if len(m) > 4 else 0.30
         for n, (x, y) in p.items():
             pos[n] = (cx + x * r, cy + y * r)
         label = next((MODULE_NAMES[n] for n in m if n in MODULE_NAMES), "")
-        ax.text(cx, cy + r + 0.14, label, ha="center", va="bottom", fontsize=5.5)
+        ax.text(cx, cy + r + 0.16, label, ha="center", va="bottom",
+                fontsize=fs + 1)
     norm = TwoSlopeNorm(0, -vlim, vlim)
     for a, b in g.subgraph(keep).edges:
-        ax.plot(*zip(pos[a], pos[b]), color=RULE, lw=0.4, zorder=1)
+        ax.plot(*zip(pos[a], pos[b]), color=RULE, lw=0.5, zorder=1)
     for n in keep:
         x, y = pos[n]
         v = nodes.at[n, color_col]
         deg = g.degree(n)
-        ax.scatter(x, y, s=12 + 5 * deg, c=[CMAP(norm(v)) if pd.notna(v) else "white"],
-                   edgecolors=INK, lw=0.3, zorder=3)
-        ax.text(x, y - 0.06, n, ha="center", va="top", fontsize=4.5,
+        ax.scatter(x, y, s=25 + 9 * deg, c=[CMAP(norm(v)) if pd.notna(v) else "white"],
+                   edgecolors=INK, lw=0.4, zorder=3)
+        ax.text(x, y - 0.075, n, ha="center", va="top", fontsize=fs,
                 fontstyle="italic", zorder=4)
     ax.set_aspect("equal")
     ax.axis("off")
@@ -626,18 +627,18 @@ def draw_network(ax, name, color_col, ncol, vlim=1.0):
 def figure8():
     net = ROOT / "results" / "network"
     summ = pd.read_csv(net / "summary.csv").set_index("set")
-    fig = plt.figure(figsize=(180 * MM, 125 * MM))
-    ax_a = fig.add_axes([0.0, 0.10, 0.60, 0.80])
+    fig = plt.figure(figsize=(250 * MM, 150 * MM))
+    ax_a = fig.add_axes([0.0, 0.03, 0.60, 0.88])
     norm = draw_network(ax_a, "persistent_down", "lfc_leptin_vs_wt", ncol=3)
-    fig.text(0.30, 0.995, "No leptin effect", ha="center", va="top", fontsize=7)
-    panel_letter(ax_a, "a", dx=0.03, dy=1.02)
+    fig.text(0.30, 0.995, "No leptin effect", ha="center", va="top", fontsize=10)
+    fig.text(0.005, 0.995, "a", ha="left", va="top", fontsize=12, fontweight="bold")
 
-    ax_b = fig.add_axes([0.64, 0.44, 0.35, 0.50])
+    ax_b = fig.add_axes([0.63, 0.42, 0.36, 0.50])
     draw_network(ax_b, "normalized_down", "lfc_saline_vs_wt", ncol=3)
-    fig.text(0.815, 0.995, "Normalized by leptin", ha="center", va="top", fontsize=7)
-    panel_letter(ax_b, "b", dx=0.03, dy=1.02)
+    fig.text(0.81, 0.995, "Normalized by leptin", ha="center", va="top", fontsize=10)
+    fig.text(0.625, 0.995, "b", ha="left", va="top", fontsize=12, fontweight="bold")
 
-    ax_c = fig.add_axes([0.72, 0.10, 0.20, 0.20])
+    ax_c = fig.add_axes([0.70, 0.08, 0.14, 0.24])
     order = [("normalized_down", "Normalized\nby leptin"),
              ("persistent_down", "No leptin\neffect")]
     x = np.arange(len(order))
@@ -646,20 +647,21 @@ def figure8():
     ax_c.bar(x - 0.18, exp, width=0.34, color=RULE, lw=0, label="Expected")
     ax_c.bar(x + 0.18, obs, width=0.34, color=DOWN, lw=0, label="Observed")
     ax_c.set_xticks(x)
-    ax_c.set_xticklabels([l for _, l in order], fontsize=5)
+    ax_c.set_xticklabels([l for _, l in order], fontsize=8)
     ax_c.tick_params(axis="x", length=0)
-    ax_c.set_ylabel("Interactions")
-    ax_c.legend(frameon=False, loc="upper left", handlelength=1, borderaxespad=0)
-    panel_letter(ax_c, "c", dx=-0.45, dy=1.05)
+    ax_c.tick_params(axis="y", labelsize=8)
+    ax_c.set_ylabel("Interactions", fontsize=9)
+    ax_c.legend(frameon=False, loc="upper left", handlelength=1, borderaxespad=0,
+                fontsize=8)
+    fig.text(0.625, 0.36, "c", ha="left", va="top", fontsize=12, fontweight="bold")
 
-    cax = fig.add_axes([0.08, 0.06, 0.14, 0.018])
+    cax = fig.add_axes([0.87, 0.14, 0.10, 0.022])
     cb = fig.colorbar(mpl.cm.ScalarMappable(norm=norm, cmap=CMAP), cax=cax,
                       orientation="horizontal", ticks=[-1, 0, 1])
     cb.outline.set_linewidth(0.4)
-    cb.ax.tick_params(length=1.5, width=0.4, labelsize=5)
-    cb.set_label("log$_2$ fold change", fontsize=5.5, labelpad=1.5)
+    cb.ax.tick_params(length=2, width=0.4, labelsize=8)
+    cb.set_label("log$_2$ fold change", fontsize=9, labelpad=2)
     save(fig, "Fig8_network")
-
 
 def save(fig, name):
     for ext in ("pdf", "svg", "png"):
